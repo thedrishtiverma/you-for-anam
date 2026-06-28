@@ -110,7 +110,7 @@ const Ch1 = () => (
       Out of a thousand faces, only a handful ever reach the last line of the
       table. The rest are weather. These few are climate.
     </p>
-    <Signature>YOU are one of them.</Signature>
+    <Signature>YOU are... one of the very few.</Signature>
   </Prose>
 );
 
@@ -136,7 +136,7 @@ const Ch2 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Care is mostly made of details<br />no one was ever asked to remember.
     </p>
-    <Signature>YOU are the one who listens like that.</Signature>
+    <Signature>YOU are... made of invisible things.</Signature>
   </Prose>
 );
 
@@ -157,7 +157,7 @@ const Ch3 = () => (
       The friends who matter most are usually the ones who show up for the
       paragraphs.
     </p>
-    <Signature>YOU are the friend who shows up for the paragraphs.</Signature>
+    <Signature>YOU are... proof that ordinary days matter.</Signature>
   </Prose>
 );
 
@@ -194,7 +194,7 @@ const Ch4 = () => (
     <p>
       Most museums are made of objects. The good ones are made of attention.
     </p>
-    <Signature>YOU are the laugh in the first wing.</Signature>
+    <Signature>YOU are... the evidence.</Signature>
   </Prose>
 );
 
@@ -221,7 +221,7 @@ const Ch5 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Quiet loyalty is the most underrated form of love.
     </p>
-    <Signature>YOU are the quiet loyalty.</Signature>
+    <Signature>YOU are... wonderfully rare.</Signature>
   </Prose>
 );
 
@@ -263,7 +263,7 @@ const Ch6 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Some friendships are not events.<br />They are climates.
     </p>
-    <Signature>YOU are the climate.</Signature>
+    <Signature>YOU are... quietly unforgettable.</Signature>
   </Prose>
 );
 
@@ -288,7 +288,7 @@ const Ch7 = () => (
     <p className="font-hand text-xl text-ink-soft pt-2">
       (Take your time. The next page can wait.)
     </p>
-    <Signature>YOU are who the book has been describing.</Signature>
+    <Signature>YOU are... one of my favorite people.</Signature>
   </Prose>
 );
 
@@ -337,7 +337,7 @@ const Ch8 = () => (
       Some people you wish a happy birthday to.<br />
       Others, you write a book for.
     </p>
-    <Signature>YOU are the reason this book exists, Anam.</Signature>
+    <Signature>YOU are... another year worth celebrating.</Signature>
   </Prose>
 );
 
