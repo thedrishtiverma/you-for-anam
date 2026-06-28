@@ -132,6 +132,7 @@ const Ch3 = () => (
       The friends who matter most are usually the ones who show up for the
       paragraphs.
     </p>
+    <Signature>YOU are the friend who shows up for the paragraphs.</Signature>
   </Prose>
 );
 
