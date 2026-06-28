@@ -276,7 +276,10 @@ const Interlude3 = () => (
       If you have begun to suspect that this book is about you —<br />
       you are reading it correctly.
     </p>
-    <div className="w-12 h-px bg-ink/20 mt-10" />
+    <div className="w-12 h-px bg-ink/20 my-8" />
+    <p className="font-serif-display italic text-base text-ink-soft">
+      YOU are right.
+    </p>
   </div>
 );
 
