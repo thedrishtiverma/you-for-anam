@@ -486,7 +486,7 @@ function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number
         <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
           {page.title}
         </p>
-        <div className="flex-1 mt-8">{page.body}</div>
+        <div className="flex-1 mt-8 overflow-y-auto pr-2">{page.body}</div>
         <Footer pageNumber={pageNumber} total={total} />
       </div>
     );
@@ -526,7 +526,7 @@ function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number
       <h2 className="font-serif-display text-3xl md:text-4xl ink-text mt-2 mb-8">
         {page.title}
       </h2>
-      <div className="flex-1 overflow-hidden">{page.body}</div>
+      <div className="flex-1 overflow-y-auto pr-2">{page.body}</div>
       <Footer pageNumber={pageNumber} total={total} />
     </div>
   );
