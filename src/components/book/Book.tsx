@@ -37,44 +37,23 @@ const Dedication = () => (
 
 const AuthorsNote = () => (
   <Prose>
-    <p>This was supposed to be a birthday wish.</p>
-    <p>
-      Just a few lines. Something thoughtful. Something that would fit inside a
-      card.
-    </p>
+    <p>This was supposed to be a birthday wish. A few lines. Something thoughtful. Something card-sized.</p>
     <p>Then I had a different idea.</p>
     <p>
-      I'm studying engineering, so my instinct is usually to build things. At
-      the same time, I've always loved writing. Somewhere between those two
-      parts of me, this project quietly became both.
+      I'm an engineer — my instinct is to build. I'm also, quietly, a writer. The first idea was a book. The second was a website. Somewhere between the two, this became both.
     </p>
     <p className="font-serif-display italic text-ink-soft">
-      A book.<br />Disguised as a website.
+      A book. Disguised as a website.
     </p>
     <p>
-      Not because birthdays need bigger gifts, but because some people deserve
-      more effort than money can buy.
-    </p>
-    <p>Over the last seven years, you've become one of those people.</p>
-    <p>
-      We haven't met in far too long, and life has kept us busy in different
-      directions. But some friendships don't ask for constant conversations to
-      remain important. They simply pick up exactly where they left off.
-    </p>
-    <p>This book is my way of saying thank you.</p>
-    <p className="font-serif-display italic text-ink-soft">
-      For listening.<br />For understanding.<br />For staying.
+      Not because birthdays need bigger gifts. Because some people deserve more effort than money can buy. Over the last seven years, you have very quietly become one of those people.
     </p>
     <p>
-      And for becoming one of the very few people who quietly changed my story.
+      We haven't met in over two years. Life kept us in different cities, different timetables, different kinds of busy. None of it has ever mattered. Some friendships don't ask for constant talking — they pick up exactly where they left off.
     </p>
-    <p className="font-serif-display text-ink pt-2">
-      Happy Birthday<br />Anam ♡
-    </p>
-    <p>
-      I hope you enjoy turning these pages as much as I enjoyed writing them.
-    </p>
-    <p className="font-hand text-2xl text-ink-soft pt-2">— Drishti</p>
+    <p>This is my way of saying thank you. For being caring. For being steady. For staying.</p>
+    <p className="font-serif-display text-ink pt-1">Happy Birthday, Anam ♡</p>
+    <p className="font-hand text-2xl text-ink-soft">— Drishti</p>
     <Signature>YOU are... worth every page.</Signature>
   </Prose>
 );
