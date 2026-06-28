@@ -325,6 +325,10 @@ const End = () => (
     <p className="mt-8 font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
       Turn the page to continue
     </p>
+    <div className="w-12 h-px bg-ink/20 my-8" />
+    <p className="font-serif-display italic text-base text-ink-soft">
+      YOU are why there is a Chapter Nine.
+    </p>
   </div>
 );
 
