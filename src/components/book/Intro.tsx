@@ -1,108 +1,82 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const LINES = [
-  "Every year,",
-  "millions of birthday wishes are written.",
-  "Most are copied.",
-  "Most are forgotten.",
-  "This one couldn't be.",
-  "Because there has only ever been one Anam.",
-  "So instead of writing another wish...",
-  "I wrote you a book.",
+  "A Very Very Very Happy Birthday, Anam 🥳❤️🫂🧿",
+  "I kept wondering what to give you for your birthday.",
+  "Buying something felt too easy.",
+  "Writing a message felt too small.",
+  "So I did what felt most like me.",
+  "I built something.",
+  "And I wrote something.",
+  "So I made you this.",
 ];
 
 export function Intro({ onOpen }: { onOpen: () => void }) {
-  const [line, setLine] = useState(0);
-  const [text, setText] = useState("");
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    if (line >= LINES.length) {
-      setDone(true);
-      return;
-    }
-    const target = LINES[line];
-    let i = 0;
-    const id = setInterval(() => {
-      i++;
-      setText(target.slice(0, i));
-      if (i >= target.length) {
-        clearInterval(id);
-        setTimeout(() => {
-          setLine((l) => l + 1);
-          setText("");
-        }, target.length > 30 ? 900 : 600);
-      }
-    }, 45);
-    return () => clearInterval(id);
-  }, [line]);
-
   return (
-    <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
+    <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-6 py-16 relative overflow-hidden">
       <DustField />
-      <div className="max-w-2xl w-full text-center">
-        <div className="space-y-6">
-          {LINES.slice(0, line).map((l, i) => (
+      <div className="max-w-2xl w-full text-center relative">
+        <motion.p
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft mb-10"
+        >
+          A note before the book
+        </motion.p>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="font-serif-display text-3xl md:text-4xl ink-text leading-snug mb-10"
+        >
+          {LINES[0]}
+        </motion.h1>
+
+        <div className="space-y-4">
+          {LINES.slice(1).map((l, i) => (
             <motion.p
               key={i}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 0.55, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="font-serif-display text-xl md:text-2xl italic text-ink-soft"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.8 + i * 0.5 }}
+              className="font-serif-display italic text-lg md:text-xl text-ink/85"
             >
               {l}
             </motion.p>
           ))}
-          {!done && (
-            <p className="font-serif-display text-2xl md:text-3xl ink-text min-h-[2.5rem]">
-              {text}
-              <span className="cursor-blink ml-0.5">▍</span>
-            </p>
-          )}
         </div>
 
-        <AnimatePresence>
-          {done && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.4 }}
-              className="mt-16 flex justify-center"
-            >
-              <WaxSeal onClick={onOpen} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.8 + LINES.length * 0.5 }}
+          className="mt-12 font-hand text-2xl md:text-3xl text-ink"
+        >
+          ...Anam-ish enough for you? ♡
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.6 + LINES.length * 0.5 }}
+          className="mt-14 flex justify-center"
+        >
+          <button
+            onClick={onOpen}
+            className="group inline-flex flex-col items-center gap-3 focus:outline-none"
+          >
+            <span className="font-serif-display italic text-xl md:text-2xl ink-text border-b border-ink/40 pb-1 group-hover:border-ink transition">
+              Open your first edition
+            </span>
+            <span className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft group-hover:text-ink transition">
+              ⸻ Drishti ⸻
+            </span>
+          </button>
+        </motion.div>
       </div>
     </div>
-  );
-}
-
-function WaxSeal({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className="group relative flex flex-col items-center gap-4 focus:outline-none"
-    >
-      <div className="relative w-32 h-32 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-105">
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle at 35% 30%, oklch(0.55 0.16 25), oklch(0.32 0.12 25) 70%, oklch(0.22 0.08 25))",
-            boxShadow:
-              "0 8px 18px -6px oklch(0.2 0.1 25 / 0.5), inset 0 -6px 12px oklch(0.18 0.08 25 / 0.6), inset 0 4px 8px oklch(0.7 0.18 25 / 0.4)",
-          }}
-        />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-serif-display italic text-paper text-2xl tracking-widest">D</span>
-        </div>
-      </div>
-      <span className="font-serif-display tracking-[0.3em] text-sm uppercase text-ink-soft group-hover:text-ink transition">
-        Open First Edition
-      </span>
-    </button>
   );
 }
 
