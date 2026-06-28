@@ -26,6 +26,9 @@ const Dedication = () => (
         For the friend who reads this —<br />
         may you see yourself the way<br />the rest of us already do.
       </p>
+      <p className="pt-4 font-serif-display italic text-base text-ink">
+        YOU are the reader this was printed for.
+      </p>
     </div>
   </div>
 );
