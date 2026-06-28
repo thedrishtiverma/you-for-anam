@@ -209,7 +209,10 @@ const Interlude2 = () => (
       You may, by now, be thinking of someone in particular.<br />
       That is the correct response.
     </p>
-    <div className="w-12 h-px bg-ink/20 mt-10" />
+    <div className="w-12 h-px bg-ink/20 my-8" />
+    <p className="font-serif-display italic text-base text-ink-soft">
+      YOU are the someone in particular.
+    </p>
   </div>
 );
 
