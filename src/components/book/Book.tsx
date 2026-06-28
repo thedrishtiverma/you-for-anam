@@ -263,6 +263,7 @@ const Ch7 = () => (
     <p className="font-hand text-xl text-ink-soft pt-2">
       (Take your time. The next page can wait.)
     </p>
+    <Signature>YOU are who the book has been describing.</Signature>
   </Prose>
 );
 
