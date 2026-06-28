@@ -53,23 +53,35 @@ const AuthorsNote = () => (
 const Ch1 = () => (
   <Prose>
     <p>
-      Most friendships are arithmetic. You add a person to your life, you
-      subtract them when distance does its work, and the answer is usually zero.
-      This is not a sad fact. It is simply how most years go.
+      Friendship, if you are honest about it, is mostly a numbers problem.
     </p>
+    <ul className="space-y-2 font-serif-body not-prose">
+      <li className="flex justify-between gap-4 border-b border-dotted border-ink/20 pb-1">
+        <span>People met</span>
+        <span className="font-mono-term text-sm">≈ 1,000</span>
+      </li>
+      <li className="flex justify-between gap-4 border-b border-dotted border-ink/20 pb-1">
+        <span>People remembered</span>
+        <span className="font-mono-term text-sm">≈ 200</span>
+      </li>
+      <li className="flex justify-between gap-4 border-b border-dotted border-ink/20 pb-1">
+        <span>People you'd stop to say hello to</span>
+        <span className="font-mono-term text-sm">&lt; 50</span>
+      </li>
+      <li className="flex justify-between gap-4 border-b border-dotted border-ink/20 pb-1">
+        <span>People genuinely missed</span>
+        <span className="font-mono-term text-sm">&lt; 10</span>
+      </li>
+      <li className="flex justify-between gap-4 pb-1">
+        <span>People who permanently changed your story</span>
+        <span className="font-serif-display italic text-sm text-ink-soft">very few</span>
+      </li>
+    </ul>
     <p>
-      A few friendships, though, behave differently. They compound. You don't
-      see them for months and yet, the next time, you pick up mid-sentence, as
-      if the conversation had only paused to let a waiter pass.
+      Out of a thousand faces, only a handful ever reach the last line of the
+      table. The rest are weather. These few are climate.
     </p>
-    <p>
-      These ones don't follow arithmetic. They follow something closer to
-      gravity — quiet, patient, working even on the days you forget to look up.
-    </p>
-    <p className="font-serif-display italic text-ink-soft pt-2">
-      The rarest people are the ones who require nothing of you,<br />
-      and still somehow leave you better.
-    </p>
+    <Signature>YOU are one of them.</Signature>
   </Prose>
 );
 
