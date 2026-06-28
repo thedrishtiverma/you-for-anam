@@ -8,7 +8,7 @@ const LINES = [
   "Most are forgotten.",
   "This one couldn't be.",
   "Because there has only ever been one Anam.",
-  "So instead of writing another birthday message...",
+  "So instead of writing another wish...",
   "I wrote you a book.",
 ];
 

@@ -5,10 +5,10 @@ export function FinalPage({ onReset }: { onReset: () => void }) {
   const [stage, setStage] = useState<"letter" | "closing" | "cover">("letter");
 
   useEffect(() => {
-    if (stage !== "cover") return;
-    const id = setTimeout(onReset, 5000);
+    if (stage !== "closing") return;
+    const id = setTimeout(() => setStage("cover"), 1700);
     return () => clearTimeout(id);
-  }, [stage, onReset]);
+  }, [stage]);
 
   return (
     <div className="paper-grain min-h-screen flex items-center justify-center px-6 py-16 relative overflow-hidden">
@@ -31,12 +31,27 @@ export function FinalPage({ onReset }: { onReset: () => void }) {
             />
 
             <div className="paper-grain-soft border border-ink/15 rounded-sm p-10 md:p-14 shadow-md">
-              <p className="font-hand text-3xl text-ink leading-relaxed">
-                Anam —
-              </p>
-              <div className="mt-6 font-hand text-2xl text-ink/80 leading-relaxed space-y-4">
-                <p>[ The handwritten letter will live here. ]</p>
-                <p>[ Drishti will write this one by hand. ]</p>
+              <p className="font-hand text-3xl text-ink leading-relaxed">Anam —</p>
+              <div className="mt-6 font-hand text-[1.6rem] md:text-[1.75rem] text-ink/90 leading-[1.55] space-y-4">
+                <p>Thank you.</p>
+                <p>
+                  For seven years of being the easiest friendship I've ever
+                  had to keep. For the conversations I'll remember long after
+                  I've forgotten what day they happened on. For being the first
+                  girl to wish me, every single time, like it was a small
+                  promise we never had to put in writing.
+                </p>
+                <p>
+                  Thank you for not keeping score. For showing up for the
+                  ordinary Tuesdays. For laughing the loud, real laugh — the
+                  one that always makes me feel like I've said something better
+                  than I have.
+                </p>
+                <p>
+                  Happy birthday. Here's to the chapters you've already
+                  written, and to the one we still have to write — over bhutta
+                  and hot tea, the next time June and the rain agree on a date.
+                </p>
               </div>
               <p className="mt-10 font-hand text-2xl text-ink text-right">— D.</p>
             </div>
@@ -58,8 +73,7 @@ export function FinalPage({ onReset }: { onReset: () => void }) {
             initial={{ scale: 1, opacity: 1, rotateY: 0 }}
             animate={{ scale: 0.85, opacity: 1, rotateY: -90 }}
             transition={{ duration: 1.6, ease: [0.32, 0.72, 0, 1] }}
-            onAnimationComplete={() => setStage("cover")}
-            className="w-[300px] h-[420px] bg-paper border border-ink/20 rounded-sm origin-left"
+            className="w-[300px] h-[420px] bg-paper border border-ink/20 rounded-sm origin-left book-shadow"
             style={{ transformStyle: "preserve-3d" }}
           />
         )}
@@ -97,6 +111,12 @@ export function FinalPage({ onReset }: { onReset: () => void }) {
             <p className="mt-8 font-serif-display italic text-ink-soft text-sm">
               Returning to the shelf…
             </p>
+            <button
+              onClick={onReset}
+              className="mt-6 font-mono-term text-[10px] tracking-[0.3em] uppercase text-ink-soft hover:text-ink transition"
+            >
+              Read Again →
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

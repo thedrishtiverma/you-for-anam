@@ -5,7 +5,6 @@ import { Intro } from "@/components/book/Intro";
 import { ErrorPage } from "@/components/book/ErrorPage";
 import { PrintingPress } from "@/components/book/PrintingPress";
 import { Book } from "@/components/book/Book";
-import { Terminal } from "@/components/book/Terminal";
 import { ChapterNine } from "@/components/book/ChapterNine";
 import { FinalPage } from "@/components/book/FinalPage";
 
@@ -27,14 +26,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Stage =
-  | "intro"
-  | "error"
-  | "press"
-  | "book"
-  | "terminal"
-  | "chapter9"
-  | "final";
+type Stage = "intro" | "error" | "press" | "book" | "chapter9" | "final";
 
 function Index() {
   const [stage, setStage] = useState<Stage>("intro");
@@ -52,8 +44,7 @@ function Index() {
           {stage === "intro" && <Intro onOpen={() => setStage("error")} />}
           {stage === "error" && <ErrorPage onDone={() => setStage("press")} />}
           {stage === "press" && <PrintingPress onOpenBook={() => setStage("book")} />}
-          {stage === "book" && <Book onFinish={() => setStage("terminal")} />}
-          {stage === "terminal" && <Terminal onContinue={() => setStage("chapter9")} />}
+          {stage === "book" && <Book onFinish={() => setStage("chapter9")} />}
           {stage === "chapter9" && <ChapterNine onDone={() => setStage("final")} />}
           {stage === "final" && <FinalPage onReset={() => setStage("intro")} />}
         </motion.div>
