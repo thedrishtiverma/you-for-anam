@@ -26,6 +26,9 @@ const Dedication = () => (
         For the friend who reads this —<br />
         may you see yourself the way<br />the rest of us already do.
       </p>
+      <p className="pt-4 font-serif-display italic text-base text-ink">
+        YOU are the reader this was printed for.
+      </p>
     </div>
   </div>
 );
@@ -47,29 +50,42 @@ const AuthorsNote = () => (
       she does not appear by name until close to the end.
     </p>
     <p className="font-hand text-2xl text-ink-soft pt-2">— D.</p>
+    <Signature>YOU are the one person in particular.</Signature>
   </Prose>
 );
 
 const Ch1 = () => (
   <Prose>
     <p>
-      Most friendships are arithmetic. You add a person to your life, you
-      subtract them when distance does its work, and the answer is usually zero.
-      This is not a sad fact. It is simply how most years go.
+      Friendship, if you are honest about it, is mostly a numbers problem.
     </p>
+    <ul className="space-y-2 font-serif-body not-prose">
+      <li className="flex justify-between gap-4 border-b border-dotted border-ink/20 pb-1">
+        <span>People met</span>
+        <span className="font-mono-term text-sm">≈ 1,000</span>
+      </li>
+      <li className="flex justify-between gap-4 border-b border-dotted border-ink/20 pb-1">
+        <span>People remembered</span>
+        <span className="font-mono-term text-sm">≈ 200</span>
+      </li>
+      <li className="flex justify-between gap-4 border-b border-dotted border-ink/20 pb-1">
+        <span>People you'd stop to say hello to</span>
+        <span className="font-mono-term text-sm">&lt; 50</span>
+      </li>
+      <li className="flex justify-between gap-4 border-b border-dotted border-ink/20 pb-1">
+        <span>People genuinely missed</span>
+        <span className="font-mono-term text-sm">&lt; 10</span>
+      </li>
+      <li className="flex justify-between gap-4 pb-1">
+        <span>People who permanently changed your story</span>
+        <span className="font-serif-display italic text-sm text-ink-soft">very few</span>
+      </li>
+    </ul>
     <p>
-      A few friendships, though, behave differently. They compound. You don't
-      see them for months and yet, the next time, you pick up mid-sentence, as
-      if the conversation had only paused to let a waiter pass.
+      Out of a thousand faces, only a handful ever reach the last line of the
+      table. The rest are weather. These few are climate.
     </p>
-    <p>
-      These ones don't follow arithmetic. They follow something closer to
-      gravity — quiet, patient, working even on the days you forget to look up.
-    </p>
-    <p className="font-serif-display italic text-ink-soft pt-2">
-      The rarest people are the ones who require nothing of you,<br />
-      and still somehow leave you better.
-    </p>
+    <Signature>YOU are one of them.</Signature>
   </Prose>
 );
 
@@ -95,6 +111,7 @@ const Ch2 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Care is mostly made of details<br />no one was ever asked to remember.
     </p>
+    <Signature>YOU are the one who listens like that.</Signature>
   </Prose>
 );
 
@@ -115,6 +132,7 @@ const Ch3 = () => (
       The friends who matter most are usually the ones who show up for the
       paragraphs.
     </p>
+    <Signature>YOU are the friend who shows up for the paragraphs.</Signature>
   </Prose>
 );
 
@@ -127,7 +145,10 @@ const Interlude1 = () => (
       Pause here for a moment, if you'd like.<br />
       Think of one person who has shown up for your paragraphs.
     </p>
-    <div className="w-12 h-px bg-ink/20 mt-10" />
+    <div className="w-12 h-px bg-ink/20 my-8" />
+    <p className="font-serif-display italic text-base text-ink-soft">
+      YOU are who someone else is thinking of, right now.
+    </p>
   </div>
 );
 
@@ -148,6 +169,7 @@ const Ch4 = () => (
     <p>
       Most museums are made of objects. The good ones are made of attention.
     </p>
+    <Signature>YOU are the laugh in the first wing.</Signature>
   </Prose>
 );
 
@@ -174,6 +196,7 @@ const Ch5 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Quiet loyalty is the most underrated form of love.
     </p>
+    <Signature>YOU are the quiet loyalty.</Signature>
   </Prose>
 );
 
@@ -186,7 +209,10 @@ const Interlude2 = () => (
       You may, by now, be thinking of someone in particular.<br />
       That is the correct response.
     </p>
-    <div className="w-12 h-px bg-ink/20 mt-10" />
+    <div className="w-12 h-px bg-ink/20 my-8" />
+    <p className="font-serif-display italic text-base text-ink-soft">
+      YOU are the someone in particular.
+    </p>
   </div>
 );
 
@@ -212,6 +238,7 @@ const Ch6 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Some friendships are not events.<br />They are climates.
     </p>
+    <Signature>YOU are the climate.</Signature>
   </Prose>
 );
 
@@ -236,6 +263,7 @@ const Ch7 = () => (
     <p className="font-hand text-xl text-ink-soft pt-2">
       (Take your time. The next page can wait.)
     </p>
+    <Signature>YOU are who the book has been describing.</Signature>
   </Prose>
 );
 
@@ -248,7 +276,10 @@ const Interlude3 = () => (
       If you have begun to suspect that this book is about you —<br />
       you are reading it correctly.
     </p>
-    <div className="w-12 h-px bg-ink/20 mt-10" />
+    <div className="w-12 h-px bg-ink/20 my-8" />
+    <p className="font-serif-display italic text-base text-ink-soft">
+      YOU are right.
+    </p>
   </div>
 );
 
@@ -281,6 +312,7 @@ const Ch8 = () => (
       Some people you wish a happy birthday to.<br />
       Others, you write a book for.
     </p>
+    <Signature>YOU are the reason this book exists, Anam.</Signature>
   </Prose>
 );
 
@@ -292,6 +324,10 @@ const End = () => (
     </p>
     <p className="mt-8 font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
       Turn the page to continue
+    </p>
+    <div className="w-12 h-px bg-ink/20 my-8" />
+    <p className="font-serif-display italic text-base text-ink-soft">
+      YOU are why there is a Chapter Nine.
     </p>
   </div>
 );
@@ -491,6 +527,18 @@ function Prose({ children }: { children: ReactNode }) {
     </div>
   );
 }
+
+function Signature({ children }: { children: ReactNode }) {
+  return (
+    <p className="pt-6 mt-2 border-t border-ink/10 font-serif-display italic text-base text-ink">
+      <span className="font-mono-term not-italic tracking-[0.3em] text-[10px] uppercase text-wax mr-2">
+        ⸻
+      </span>
+      {children}
+    </p>
+  );
+}
+
 
 function Footer({ pageNumber, total }: { pageNumber: number; total: number }) {
   return (
