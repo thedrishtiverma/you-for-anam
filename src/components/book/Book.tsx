@@ -169,6 +169,7 @@ const Ch4 = () => (
     <p>
       Most museums are made of objects. The good ones are made of attention.
     </p>
+    <Signature>YOU are the laugh in the first wing.</Signature>
   </Prose>
 );
 
