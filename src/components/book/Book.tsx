@@ -50,6 +50,7 @@ const AuthorsNote = () => (
       she does not appear by name until close to the end.
     </p>
     <p className="font-hand text-2xl text-ink-soft pt-2">— D.</p>
+    <Signature>YOU are the one person in particular.</Signature>
   </Prose>
 );
 
