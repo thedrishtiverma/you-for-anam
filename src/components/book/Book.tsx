@@ -145,7 +145,10 @@ const Interlude1 = () => (
       Pause here for a moment, if you'd like.<br />
       Think of one person who has shown up for your paragraphs.
     </p>
-    <div className="w-12 h-px bg-ink/20 mt-10" />
+    <div className="w-12 h-px bg-ink/20 my-8" />
+    <p className="font-serif-display italic text-base text-ink-soft">
+      YOU are who someone else is thinking of, right now.
+    </p>
   </div>
 );
 
