@@ -412,9 +412,16 @@ export function Book({ onFinish }: { onFinish: () => void }) {
   return (
     <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-4 py-12 relative">
       <div className="w-full max-w-3xl">
-        <div
-          className="relative bg-paper rounded-sm book-shadow overflow-hidden"
+        <motion.div
+          className="relative bg-paper rounded-sm book-shadow overflow-hidden touch-pan-y"
           style={{ aspectRatio: "3 / 4", minHeight: 560 }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.15}
+          onDragEnd={(_, info) => {
+            if (info.offset.x < -60 || info.velocity.x < -300) next();
+            else if (info.offset.x > 60 || info.velocity.x > 300) prev();
+          }}
         >
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
@@ -439,7 +446,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
               boxShadow: "-1px 1px 2px oklch(0.2 0.02 60 / 0.15)",
             }}
           />
-        </div>
+        </motion.div>
 
         <div className="mt-6 flex items-center justify-between">
           <button
