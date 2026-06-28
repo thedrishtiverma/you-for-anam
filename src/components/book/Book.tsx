@@ -504,6 +504,18 @@ function Prose({ children }: { children: ReactNode }) {
   );
 }
 
+function Signature({ children }: { children: ReactNode }) {
+  return (
+    <p className="pt-6 mt-2 border-t border-ink/10 font-serif-display italic text-base text-ink">
+      <span className="font-mono-term not-italic tracking-[0.3em] text-[10px] uppercase text-wax mr-2">
+        ⸻
+      </span>
+      {children}
+    </p>
+  );
+}
+
+
 function Footer({ pageNumber, total }: { pageNumber: number; total: number }) {
   return (
     <div className="mt-6 pt-3 border-t border-ink/10 flex items-center justify-between font-serif-display italic text-xs text-ink-soft">
