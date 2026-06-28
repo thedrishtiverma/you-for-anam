@@ -458,6 +458,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
           </button>
           <span className="font-serif-display italic text-ink-soft text-sm">
             page {index + 1} of {PAGES.length}
+            <span className="hidden md:inline ml-2 text-ink-soft/60">· swipe or use arrows</span>
           </span>
           <button
             onClick={next}
