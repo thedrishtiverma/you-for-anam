@@ -312,6 +312,7 @@ const Ch8 = () => (
       Some people you wish a happy birthday to.<br />
       Others, you write a book for.
     </p>
+    <Signature>YOU are the reason this book exists, Anam.</Signature>
   </Prose>
 );
 
