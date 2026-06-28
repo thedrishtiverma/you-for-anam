@@ -111,6 +111,7 @@ const Ch2 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Care is mostly made of details<br />no one was ever asked to remember.
     </p>
+    <Signature>YOU are the one who listens like that.</Signature>
   </Prose>
 );
 
