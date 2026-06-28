@@ -238,6 +238,7 @@ const Ch6 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Some friendships are not events.<br />They are climates.
     </p>
+    <Signature>YOU are the climate.</Signature>
   </Prose>
 );
 
