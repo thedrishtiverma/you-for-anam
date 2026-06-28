@@ -159,19 +159,29 @@ const Interlude1 = () => (
 const Ch4 = () => (
   <Prose>
     <p>
-      If you kept a museum of small moments — not the loud ones, but the small
-      ones — what would be on display? A handful of voice notes, probably. A few
-      screenshots of conversations that made you laugh on a bad day. The exact
-      cadence of someone's laugh when something is genuinely funny, not the
-      polite kind.
+      A museum of small moments. Voice notes. Old screenshots. The exact
+      cadence of someone's laugh when something is actually funny — not the
+      polite version.
     </p>
     <p>
-      Mine would have one whole wing devoted to a particular kind of laughter:
-      the loud, unguarded kind. The kind you can only do around someone who has
-      seen the worst of you and decided to stay anyway.
+      Mine has a whole wing devoted to your laugh. The loud one. The
+      unguarded one. The one that always makes me feel like I've said
+      something better than I actually have.
     </p>
     <p>
-      Most museums are made of objects. The good ones are made of attention.
+      And then there are the running jokes — the small, ridiculous ones
+      that survive entire years on their own.
+    </p>
+    <p className="font-hand text-2xl text-ink/90 pt-1">
+      "Vaibhavi se abhi bhi vahi wali dosti hai? Best friends haan?"
+    </p>
+    <p className="font-serif-display italic text-ink-soft text-sm">
+      (Some questions, in this friendship, are required by tradition.)
+    </p>
+    <p>
+      The good museums aren't made of objects. They're made of attention —
+      the kind two people pay each other over a long enough time that it
+      becomes its own little archive.
     </p>
     <Signature>YOU are... the evidence.</Signature>
   </Prose>
@@ -223,21 +233,27 @@ const Interlude2 = () => (
 const Ch6 = () => (
   <Prose>
     <p>
-      There is a small effect in physics where one quiet event, far away,
-      changes the weather everywhere else. We borrow the metaphor too often, and
-      usually for the wrong reasons. But the principle holds.
+      Class nine. 2019. An ordinary afternoon I would not have remembered
+      otherwise.
     </p>
     <p>
-      Some people enter your life on what feels like a perfectly ordinary
-      afternoon — class nine, say, in a year that no one was paying attention
-      to — and seven years later you look back and realise the weather has been
-      different ever since.
+      I was upset about something. I don't think I'd planned to say a word.
+      And then, somehow, I told you everything — things from my past I had
+      never said out loud to anyone, not by myself, not first.
     </p>
     <p>
-      You did not notice at the time. That is the whole point. The best people
-      arrive quietly. They do not announce themselves. They simply begin showing
-      up, and one day you understand that a particular version of your life
-      would not exist without them.
+      You were fifteen. You had no business being that mature. But you
+      listened the way you always listen — without flinching, without rushing
+      to fix it, without making it about you. And somewhere inside that
+      conversation I understood that some people are safe in a way most
+      people simply aren't.
+    </p>
+    <p>
+      I think that was the day the weather quietly changed.
+    </p>
+    <p>
+      Seven years later I can say it plainly: a particular version of my life
+      would not exist without that afternoon, or without you.
     </p>
     <p className="font-serif-display italic text-ink-soft pt-2">
       Some friendships are not events.<br />They are climates.
@@ -249,20 +265,23 @@ const Ch6 = () => (
 const Ch7 = () => (
   <Prose>
     <p>
-      A small exercise, before we continue.
+      A short exercise, before we keep going.
     </p>
     <p>
-      Re-read the last few chapters with one change: assume the book has been
-      describing you the entire time. The patient listener. The friend who never
-      complains. The one who laughs the loud, unguarded laugh. The one who
-      wishes people before midnight because she would rather be first than
-      convenient.
+      Re-read the last few chapters and assume, just for a moment, that the
+      book has been describing one specific person the whole time. The
+      patient listener. The friend who has never once kept score. The one
+      who has been wishing me — every single year, somehow always first —
+      since we were in school.
     </p>
     <p>
-      Notice whether anything fits.
+      It is honestly difficult to write about her without sounding like I
+      am making her up. She is caring in a way that doesn't perform itself.
+      Always cheerful. Almost annoyingly positive. The low-maintenance
+      friend everyone claims to want and almost nobody actually is.
     </p>
     <p>
-      Notice whether it has, perhaps, always fit.
+      My confidant. My favourite. My girl.
     </p>
     <p className="font-hand text-xl text-ink-soft pt-2">
       (Take your time. The next page can wait.)
@@ -289,28 +308,37 @@ const Interlude3 = () => (
 
 const Ch8 = () => (
   <Prose>
+    <p>Anam.</p>
     <p>
-      Anam.
+      You have been the subject of this book since the dedication. I think
+      you've known for a few pages now. I hope it arrived gently — the way
+      you arrive in my life, without fuss, without warning, without ever
+      making it a thing.
     </p>
     <p>
-      You have been the subject of this book since the dedication. I suspect you
-      have known for a few pages now. I hope the realisation was a slow, warm
-      one, and not a sudden one — the kind of recognition that arrives the way
-      you arrive in my life, quietly, without making any fuss.
+      I'm writing all of this because I want to actually say it. I cannot
+      meet you right now, but I refuse to let another year pass without
+      telling you, properly, that you are still my most favourite person
+      after all this time. My confidant. My favourite. My girl.
     </p>
     <p>
-      Seven years is a long time to know someone, and a short time to do
-      justice to them. I will not try to summarise you here. People are not
-      summaries. You are, for the record, the friend the chapters were
-      describing. The low-maintenance one. The first-wisher. The loud-laugher.
-      The one whose understanding has, for the better part of a decade, asked
-      almost nothing of me and given more than I have ever thanked her for.
+      Seven years. From class nine to whatever strange chapter of life this
+      is. Different cities, different timetables, two years since we've been
+      in the same room — and somehow nothing about us has had to change.
+      You've never once made me apologise for being busy. You've never
+      complained about the gaps. You just deliver your part of this
+      friendship, quietly, every time, without ever being asked.
     </p>
     <p>
-      So — happy birthday. Not the polite kind. The kind that means: I am glad,
-      genuinely, that you exist. I am glad the world made a version of itself
-      that included you in it. I am glad the climate has been different ever
-      since.
+      You are caring without performance. Cheerful in a way that doesn't
+      ask for credit. Mature, understanding, naturally expressive — the
+      friend everyone hopes they get to have. The one I'm lucky I do.
+    </p>
+    <p>
+      So — happy birthday. Not the polite version. The kind that means:
+      I am glad, genuinely, that you exist. I am glad the world made a
+      version of itself with you in it. I am glad the climate has been
+      different ever since.
     </p>
     <p className="font-serif-display italic text-ink-soft pt-2">
       Some people you wish a happy birthday to.<br />
