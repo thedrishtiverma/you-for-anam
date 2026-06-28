@@ -5,9 +5,10 @@ export function ErrorPage({ onDone }: { onDone: () => void }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // ~10s load
     const id = setInterval(() => {
       setProgress((p) => {
-        const next = p + 2 + Math.random() * 3;
+        const next = p + 1;
         if (next >= 100) {
           clearInterval(id);
           setTimeout(onDone, 900);
@@ -15,7 +16,7 @@ export function ErrorPage({ onDone }: { onDone: () => void }) {
         }
         return next;
       });
-    }, 90);
+    }, 100);
     return () => clearInterval(id);
   }, [onDone]);
 
