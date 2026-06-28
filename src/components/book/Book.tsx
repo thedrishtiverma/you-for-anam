@@ -18,39 +18,64 @@ type Page = {
 
 const Dedication = () => (
   <div className="h-full flex items-center justify-center text-center">
-    <div className="space-y-6 max-w-sm">
+    <div className="space-y-8 max-w-md">
       <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
         Dedication
       </p>
-      <p className="font-serif-display italic text-2xl ink-text leading-relaxed">
-        For the friend who reads this —<br />
-        may you see yourself the way<br />the rest of us already do.
+      <p className="font-serif-display italic text-3xl md:text-4xl ink-text leading-tight">
+        For Anam.
       </p>
-      <p className="pt-4 font-serif-display italic text-base text-ink">
-        YOU are the reader this was printed for.
+      <p className="font-serif-body text-ink/85 text-base md:text-lg leading-relaxed">
+        To celebrate another year of you,<br />
+        and another year the people around you<br />
+        got to have you in their lives.
       </p>
+      <Signature>YOU are... worth writing for.</Signature>
     </div>
   </div>
 );
 
 const AuthorsNote = () => (
   <Prose>
+    <p>This was supposed to be a birthday wish.</p>
     <p>
-      This began as a birthday wish. It was supposed to be three lines long, the
-      sort of thing you write in the back of a card and worry about for an hour.
+      Just a few lines. Something thoughtful. Something that would fit inside a
+      card.
+    </p>
+    <p>Then I had a different idea.</p>
+    <p>
+      I'm studying engineering, so my instinct is usually to build things. At
+      the same time, I've always loved writing. Somewhere between those two
+      parts of me, this project quietly became both.
+    </p>
+    <p className="font-serif-display italic text-ink-soft">
+      A book.<br />Disguised as a website.
     </p>
     <p>
-      Somewhere between the first sentence and the second, it became a different
-      thing. I think because some people deserve more than a paragraph, and a
-      paragraph is all that most birthdays ever get.
+      Not because birthdays need bigger gifts, but because some people deserve
+      more effort than money can buy.
+    </p>
+    <p>Over the last seven years, you've become one of those people.</p>
+    <p>
+      We haven't met in far too long, and life has kept us busy in different
+      directions. But some friendships don't ask for constant conversations to
+      remain important. They simply pick up exactly where they left off.
+    </p>
+    <p>This book is my way of saying thank you.</p>
+    <p className="font-serif-display italic text-ink-soft">
+      For listening.<br />For understanding.<br />For staying.
     </p>
     <p>
-      So I wrote a small book instead. It is about friendship, mostly. It is
-      about the people who stay. It is about one person in particular, although
-      she does not appear by name until close to the end.
+      And for becoming one of the very few people who quietly changed my story.
     </p>
-    <p className="font-hand text-2xl text-ink-soft pt-2">— D.</p>
-    <Signature>YOU are the one person in particular.</Signature>
+    <p className="font-serif-display text-ink pt-2">
+      Happy Birthday<br />Anam ♡
+    </p>
+    <p>
+      I hope you enjoy turning these pages as much as I enjoyed writing them.
+    </p>
+    <p className="font-hand text-2xl text-ink-soft pt-2">— Drishti</p>
+    <Signature>YOU are... worth every page.</Signature>
   </Prose>
 );
 
