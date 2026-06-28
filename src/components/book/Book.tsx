@@ -18,39 +18,64 @@ type Page = {
 
 const Dedication = () => (
   <div className="h-full flex items-center justify-center text-center">
-    <div className="space-y-6 max-w-sm">
+    <div className="space-y-8 max-w-md">
       <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
         Dedication
       </p>
-      <p className="font-serif-display italic text-2xl ink-text leading-relaxed">
-        For the friend who reads this —<br />
-        may you see yourself the way<br />the rest of us already do.
+      <p className="font-serif-display italic text-3xl md:text-4xl ink-text leading-tight">
+        For Anam.
       </p>
-      <p className="pt-4 font-serif-display italic text-base text-ink">
-        YOU are the reader this was printed for.
+      <p className="font-serif-body text-ink/85 text-base md:text-lg leading-relaxed">
+        To celebrate another year of you,<br />
+        and another year the people around you<br />
+        got to have you in their lives.
       </p>
+      <Signature>YOU are... worth writing for.</Signature>
     </div>
   </div>
 );
 
 const AuthorsNote = () => (
   <Prose>
+    <p>This was supposed to be a birthday wish.</p>
     <p>
-      This began as a birthday wish. It was supposed to be three lines long, the
-      sort of thing you write in the back of a card and worry about for an hour.
+      Just a few lines. Something thoughtful. Something that would fit inside a
+      card.
+    </p>
+    <p>Then I had a different idea.</p>
+    <p>
+      I'm studying engineering, so my instinct is usually to build things. At
+      the same time, I've always loved writing. Somewhere between those two
+      parts of me, this project quietly became both.
+    </p>
+    <p className="font-serif-display italic text-ink-soft">
+      A book.<br />Disguised as a website.
     </p>
     <p>
-      Somewhere between the first sentence and the second, it became a different
-      thing. I think because some people deserve more than a paragraph, and a
-      paragraph is all that most birthdays ever get.
+      Not because birthdays need bigger gifts, but because some people deserve
+      more effort than money can buy.
+    </p>
+    <p>Over the last seven years, you've become one of those people.</p>
+    <p>
+      We haven't met in far too long, and life has kept us busy in different
+      directions. But some friendships don't ask for constant conversations to
+      remain important. They simply pick up exactly where they left off.
+    </p>
+    <p>This book is my way of saying thank you.</p>
+    <p className="font-serif-display italic text-ink-soft">
+      For listening.<br />For understanding.<br />For staying.
     </p>
     <p>
-      So I wrote a small book instead. It is about friendship, mostly. It is
-      about the people who stay. It is about one person in particular, although
-      she does not appear by name until close to the end.
+      And for becoming one of the very few people who quietly changed my story.
     </p>
-    <p className="font-hand text-2xl text-ink-soft pt-2">— D.</p>
-    <Signature>YOU are the one person in particular.</Signature>
+    <p className="font-serif-display text-ink pt-2">
+      Happy Birthday<br />Anam ♡
+    </p>
+    <p>
+      I hope you enjoy turning these pages as much as I enjoyed writing them.
+    </p>
+    <p className="font-hand text-2xl text-ink-soft pt-2">— Drishti</p>
+    <Signature>YOU are... worth every page.</Signature>
   </Prose>
 );
 
@@ -85,7 +110,7 @@ const Ch1 = () => (
       Out of a thousand faces, only a handful ever reach the last line of the
       table. The rest are weather. These few are climate.
     </p>
-    <Signature>YOU are one of them.</Signature>
+    <Signature>YOU are... one of the very few.</Signature>
   </Prose>
 );
 
@@ -111,7 +136,7 @@ const Ch2 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Care is mostly made of details<br />no one was ever asked to remember.
     </p>
-    <Signature>YOU are the one who listens like that.</Signature>
+    <Signature>YOU are... made of invisible things.</Signature>
   </Prose>
 );
 
@@ -132,7 +157,7 @@ const Ch3 = () => (
       The friends who matter most are usually the ones who show up for the
       paragraphs.
     </p>
-    <Signature>YOU are the friend who shows up for the paragraphs.</Signature>
+    <Signature>YOU are... proof that ordinary days matter.</Signature>
   </Prose>
 );
 
@@ -169,7 +194,7 @@ const Ch4 = () => (
     <p>
       Most museums are made of objects. The good ones are made of attention.
     </p>
-    <Signature>YOU are the laugh in the first wing.</Signature>
+    <Signature>YOU are... the evidence.</Signature>
   </Prose>
 );
 
@@ -196,7 +221,7 @@ const Ch5 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Quiet loyalty is the most underrated form of love.
     </p>
-    <Signature>YOU are the quiet loyalty.</Signature>
+    <Signature>YOU are... wonderfully rare.</Signature>
   </Prose>
 );
 
@@ -238,7 +263,7 @@ const Ch6 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Some friendships are not events.<br />They are climates.
     </p>
-    <Signature>YOU are the climate.</Signature>
+    <Signature>YOU are... quietly unforgettable.</Signature>
   </Prose>
 );
 
@@ -263,7 +288,7 @@ const Ch7 = () => (
     <p className="font-hand text-xl text-ink-soft pt-2">
       (Take your time. The next page can wait.)
     </p>
-    <Signature>YOU are who the book has been describing.</Signature>
+    <Signature>YOU are... one of my favorite people.</Signature>
   </Prose>
 );
 
@@ -312,7 +337,7 @@ const Ch8 = () => (
       Some people you wish a happy birthday to.<br />
       Others, you write a book for.
     </p>
-    <Signature>YOU are the reason this book exists, Anam.</Signature>
+    <Signature>YOU are... another year worth celebrating.</Signature>
   </Prose>
 );
 
@@ -387,9 +412,16 @@ export function Book({ onFinish }: { onFinish: () => void }) {
   return (
     <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-4 py-12 relative">
       <div className="w-full max-w-3xl">
-        <div
-          className="relative bg-paper rounded-sm book-shadow overflow-hidden"
+        <motion.div
+          className="relative bg-paper rounded-sm book-shadow overflow-hidden touch-pan-y"
           style={{ aspectRatio: "3 / 4", minHeight: 560 }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.15}
+          onDragEnd={(_, info) => {
+            if (info.offset.x < -60 || info.velocity.x < -300) next();
+            else if (info.offset.x > 60 || info.velocity.x > 300) prev();
+          }}
         >
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
@@ -414,7 +446,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
               boxShadow: "-1px 1px 2px oklch(0.2 0.02 60 / 0.15)",
             }}
           />
-        </div>
+        </motion.div>
 
         <div className="mt-6 flex items-center justify-between">
           <button
@@ -426,6 +458,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
           </button>
           <span className="font-serif-display italic text-ink-soft text-sm">
             page {index + 1} of {PAGES.length}
+            <span className="hidden md:inline ml-2 text-ink-soft/60">· swipe or use arrows</span>
           </span>
           <button
             onClick={next}

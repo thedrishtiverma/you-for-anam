@@ -53,7 +53,11 @@ export function FinalPage({ onReset }: { onReset: () => void }) {
                   and hot tea, the next time June and the rain agree on a date.
                 </p>
               </div>
-              <p className="mt-10 font-hand text-2xl text-ink text-right">— D.</p>
+              <p className="mt-10 font-hand text-2xl text-ink text-right">— Drishti</p>
+              <p className="mt-8 pt-4 border-t border-ink/10 font-serif-display italic text-base text-ink">
+                <span className="font-mono-term not-italic tracking-[0.3em] text-[10px] uppercase text-wax mr-2">⸻</span>
+                YOU are... my favorite chapter.
+              </p>
             </div>
 
             <div className="mt-10 text-center">
