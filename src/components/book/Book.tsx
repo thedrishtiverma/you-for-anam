@@ -196,6 +196,7 @@ const Ch5 = () => (
     <p className="font-serif-display italic text-ink-soft pt-2">
       Quiet loyalty is the most underrated form of love.
     </p>
+    <Signature>YOU are the quiet loyalty.</Signature>
   </Prose>
 );
 
