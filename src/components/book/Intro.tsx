@@ -67,11 +67,11 @@ export function Intro({ onOpen }: { onOpen: () => void }) {
             onClick={onOpen}
             className="group inline-flex flex-col items-center gap-3 focus:outline-none"
           >
-            <span className="font-serif-display italic text-xl md:text-2xl ink-text border-b border-ink/40 pb-1 group-hover:border-ink transition">
-              Open your first edition
+            <span className="font-mono-term font-bold tracking-[0.35em] text-sm md:text-base uppercase ink-text border border-ink/60 px-6 py-3 rounded-sm group-hover:bg-ink group-hover:text-paper transition">
+              OPEN YOUR FIRST EDITION
             </span>
             <span className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft group-hover:text-ink transition">
-              ⸻ Drishti ⸻
+              ⸻ DRISHTI ⸻
             </span>
           </button>
         </motion.div>
