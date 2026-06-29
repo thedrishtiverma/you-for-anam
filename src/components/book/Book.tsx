@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BugCard, BUG_CARDS } from "./BugCard";
 
 type Page = {
@@ -443,6 +443,15 @@ export function Book({ onFinish }: { onFinish: () => void }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [bug, setBug] = useState<number | null>(null);
+  const lastTurnSoundAt = useRef<number>(0);
+
+  const playTurnSound = () => {
+    const now = performance.now();
+    if (now - lastTurnSoundAt.current < 420) return;
+    lastTurnSoundAt.current = now;
+    playPageTurn();
+  };
+
 
   const page = PAGES[index];
 
@@ -451,7 +460,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
       onFinish();
       return;
     }
-    playPageTurn();
+    playTurnSound();
     setDirection(1);
     const nextIndex = index + 1;
     setIndex(nextIndex);
@@ -460,7 +469,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
 
   const prev = () => {
     if (index === 0) return;
-    playPageTurn();
+    playTurnSound();
     setDirection(-1);
     setIndex((i) => i - 1);
   };
