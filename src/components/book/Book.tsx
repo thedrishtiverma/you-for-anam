@@ -469,7 +469,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
 
   const prev = () => {
     if (index === 0) return;
-    playPageTurn();
+    playTurnSound();
     setDirection(-1);
     setIndex((i) => i - 1);
   };
