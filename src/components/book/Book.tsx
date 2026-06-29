@@ -460,7 +460,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
       onFinish();
       return;
     }
-    playPageTurn();
+    playTurnSound();
     setDirection(1);
     const nextIndex = index + 1;
     setIndex(nextIndex);
