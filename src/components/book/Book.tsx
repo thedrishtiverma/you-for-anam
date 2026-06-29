@@ -459,6 +459,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
           <button
             onClick={prev}
             disabled={index === 0}
+            aria-label="Go to previous page"
             className="font-mono-term text-xs tracking-[0.3em] uppercase text-ink-soft hover:text-ink transition disabled:opacity-30"
           >
             ← Previous
@@ -469,6 +470,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
           </span>
           <button
             onClick={next}
+            aria-label={index >= PAGES.length - 1 ? "Continue to next section" : "Go to next page"}
             className="font-mono-term text-xs tracking-[0.3em] uppercase text-ink-soft hover:text-ink transition"
           >
             {index >= PAGES.length - 1 ? "Continue →" : "Next →"}
