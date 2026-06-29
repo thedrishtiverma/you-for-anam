@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://you-for-anam.lovable.app/sitemap.xml

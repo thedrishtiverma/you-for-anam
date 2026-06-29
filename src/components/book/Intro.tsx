@@ -65,6 +65,7 @@ export function Intro({ onOpen }: { onOpen: () => void }) {
         >
           <button
             onClick={onOpen}
+            aria-label="Open the first edition book and start reading"
             className="group inline-flex flex-col items-center gap-3 focus:outline-none"
           >
             <span className="font-mono-term font-bold tracking-[0.35em] text-sm md:text-base uppercase ink-text border border-ink/60 px-6 py-3 rounded-sm group-hover:bg-ink group-hover:text-paper transition">

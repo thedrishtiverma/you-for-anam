@@ -1,0 +1,9 @@
+# YOU — A First Edition, for Anam
+
+> An interactive single-page experience designed as a handcrafted first-edition book written for one reader, Anam. A literary birthday gift built by Drishti.
+
+This site is a personal, one-of-one birthday project. It opens like a book and reads as a short literary work in eight chapters with front matter, printer's notes, and a final handwritten letter.
+
+## Pages
+
+- [Home](/): The full single-page book experience — intro, book launch, chapters, and final letter.
