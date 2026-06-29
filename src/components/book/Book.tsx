@@ -443,6 +443,15 @@ export function Book({ onFinish }: { onFinish: () => void }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [bug, setBug] = useState<number | null>(null);
+  const lastTurnSoundAt = useRef<number>(0);
+
+  const playTurnSound = () => {
+    const now = performance.now();
+    if (now - lastTurnSoundAt.current < 420) return;
+    lastTurnSoundAt.current = now;
+    playPageTurn();
+  };
+
 
   const page = PAGES[index];
 
