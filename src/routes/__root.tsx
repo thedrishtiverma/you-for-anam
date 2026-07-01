@@ -99,7 +99,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap",
       },
     ],
-  }),
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "YOU — A First Edition, for Anam",
+          url: "https://you-for-anam.lovable.app/",
+          description:
+            "An interactive, single-page website designed as a first-edition book for a one-reader, Anam.",
+          inLanguage: "en",
+          author: { "@type": "Person", name: "Drishti" },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "First Edition, for Anam",
+          url: "https://you-for-anam.lovable.app/",
+          founder: { "@type": "Person", name: "Drishti" },
+        }),
+      },
+    ],
+
 
   shellComponent: RootShell,
   component: RootComponent,
