@@ -8,7 +8,56 @@ export function ChapterNine({ onDone }: { onDone: () => void }) {
   const [stage, setStage] = useState<Stage>("appendix");
   const [checked, setChecked] = useState(false);
 
+  const playConfettiSound = () => {
+    try {
+      const AudioCtx =
+        (window as any).AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const now = ctx.currentTime;
+
+      // Gentle "pop" burst
+      const popOsc = ctx.createOscillator();
+      const popGain = ctx.createGain();
+      popOsc.type = "triangle";
+      popOsc.frequency.setValueAtTime(880, now);
+      popOsc.frequency.exponentialRampToValueAtTime(220, now + 0.18);
+      popGain.gain.setValueAtTime(0.0001, now);
+      popGain.gain.exponentialRampToValueAtTime(0.25, now + 0.02);
+      popGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+      popOsc.connect(popGain).connect(ctx.destination);
+      popOsc.start(now);
+      popOsc.stop(now + 0.24);
+
+      // Sparkle shimmer (filtered noise)
+      const bufferSize = ctx.sampleRate * 0.9;
+      const noiseBuf = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = noiseBuf.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = noiseBuf;
+      const bp = ctx.createBiquadFilter();
+      bp.type = "bandpass";
+      bp.frequency.value = 5200;
+      bp.Q.value = 1.4;
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(0.0001, now);
+      noiseGain.gain.exponentialRampToValueAtTime(0.09, now + 0.06);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
+      noise.connect(bp).connect(noiseGain).connect(ctx.destination);
+      noise.start(now + 0.02);
+      noise.stop(now + 0.95);
+
+      setTimeout(() => ctx.close().catch(() => {}), 1200);
+    } catch {
+      /* no-op */
+    }
+  };
+
   const accept = () => {
+    playConfettiSound();
     confetti({
       particleCount: 120,
       spread: 80,
@@ -20,6 +69,7 @@ export function ChapterNine({ onDone }: { onDone: () => void }) {
     setStage("done");
     setTimeout(onDone, 2800);
   };
+
 
   return (
     <div className="paper-grain min-h-screen flex items-center justify-center px-4 py-12">
