@@ -21,6 +21,10 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "A first edition, printed once, for exactly one reader.",
       },
+      { property: "og:url", content: "https://you-for-anam.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://you-for-anam.lovable.app/" },
     ],
   }),
   component: Index,
