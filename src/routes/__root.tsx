@@ -77,6 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "UWQlMKeAU-VBmzJzrDY1XUVxy2KXZaH7OndacemIBWM" },
       { title: "YOU — A First Edition, for Anam" },
       { name: "description", content: "An interactive, single-page website designed as a first-edition book for a one-reader, Anam" },
       { name: "author", content: "Drishti" },
