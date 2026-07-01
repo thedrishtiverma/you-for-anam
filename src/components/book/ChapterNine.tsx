@@ -15,46 +15,81 @@ export function ChapterNine({ onDone }: { onDone: () => void }) {
       if (!AudioCtx) return;
       const ctx = new AudioCtx();
       const now = ctx.currentTime;
+      const master = ctx.createGain();
+      master.gain.value = 0.9;
+      master.connect(ctx.destination);
 
-      // Gentle "pop" burst
-      const popOsc = ctx.createOscillator();
-      const popGain = ctx.createGain();
-      popOsc.type = "triangle";
-      popOsc.frequency.setValueAtTime(880, now);
-      popOsc.frequency.exponentialRampToValueAtTime(220, now + 0.18);
-      popGain.gain.setValueAtTime(0.0001, now);
-      popGain.gain.exponentialRampToValueAtTime(0.25, now + 0.02);
-      popGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
-      popOsc.connect(popGain).connect(ctx.destination);
-      popOsc.start(now);
-      popOsc.stop(now + 0.24);
-
-      // Sparkle shimmer (filtered noise)
-      const bufferSize = ctx.sampleRate * 0.9;
-      const noiseBuf = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = noiseBuf.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+      // 1. Party-popper "POP" — short filtered noise transient
+      const popBuf = ctx.createBuffer(1, ctx.sampleRate * 0.08, ctx.sampleRate);
+      const popData = popBuf.getChannelData(0);
+      for (let i = 0; i < popData.length; i++) {
+        popData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / popData.length, 2);
       }
-      const noise = ctx.createBufferSource();
-      noise.buffer = noiseBuf;
+      const pop = ctx.createBufferSource();
+      pop.buffer = popBuf;
+      const popFilter = ctx.createBiquadFilter();
+      popFilter.type = "lowpass";
+      popFilter.frequency.value = 1800;
+      const popGain = ctx.createGain();
+      popGain.gain.value = 0.55;
+      pop.connect(popFilter).connect(popGain).connect(master);
+      pop.start(now);
+
+      // 2. Bright "thump" body — pitched sine drop
+      const thump = ctx.createOscillator();
+      const thumpGain = ctx.createGain();
+      thump.type = "sine";
+      thump.frequency.setValueAtTime(520, now);
+      thump.frequency.exponentialRampToValueAtTime(90, now + 0.14);
+      thumpGain.gain.setValueAtTime(0.0001, now);
+      thumpGain.gain.exponentialRampToValueAtTime(0.5, now + 0.01);
+      thumpGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+      thump.connect(thumpGain).connect(master);
+      thump.start(now);
+      thump.stop(now + 0.25);
+
+      // 3. Celebratory chime arpeggio (C major-ish: C6, E6, G6, C7)
+      const notes = [1046.5, 1318.5, 1567.98, 2093.0];
+      notes.forEach((freq, i) => {
+        const t = now + 0.05 + i * 0.07;
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "triangle";
+        o.frequency.value = freq;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.18, t + 0.015);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+        o.connect(g).connect(master);
+        o.start(t);
+        o.stop(t + 0.55);
+      });
+
+      // 4. Sparkle shimmer — high bandpassed noise tail
+      const shimmerBuf = ctx.createBuffer(1, ctx.sampleRate * 1.2, ctx.sampleRate);
+      const sData = shimmerBuf.getChannelData(0);
+      for (let i = 0; i < sData.length; i++) {
+        sData[i] = (Math.random() * 2 - 1) * (1 - i / sData.length);
+      }
+      const shimmer = ctx.createBufferSource();
+      shimmer.buffer = shimmerBuf;
       const bp = ctx.createBiquadFilter();
       bp.type = "bandpass";
-      bp.frequency.value = 5200;
-      bp.Q.value = 1.4;
-      const noiseGain = ctx.createGain();
-      noiseGain.gain.setValueAtTime(0.0001, now);
-      noiseGain.gain.exponentialRampToValueAtTime(0.09, now + 0.06);
-      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
-      noise.connect(bp).connect(noiseGain).connect(ctx.destination);
-      noise.start(now + 0.02);
-      noise.stop(now + 0.95);
+      bp.frequency.value = 6500;
+      bp.Q.value = 1.8;
+      const shimmerGain = ctx.createGain();
+      shimmerGain.gain.setValueAtTime(0.0001, now);
+      shimmerGain.gain.exponentialRampToValueAtTime(0.11, now + 0.08);
+      shimmerGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.15);
+      shimmer.connect(bp).connect(shimmerGain).connect(master);
+      shimmer.start(now + 0.03);
+      shimmer.stop(now + 1.2);
 
-      setTimeout(() => ctx.close().catch(() => {}), 1200);
+      setTimeout(() => ctx.close().catch(() => {}), 1600);
     } catch {
       /* no-op */
     }
   };
+
 
   const accept = () => {
     playConfettiSound();
