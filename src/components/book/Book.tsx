@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, type ReactNode } from "react";
 import { BugCard, BUG_CARDS } from "./BugCard";
+import { playPageTurn } from "./pageTurnAudio";
 
 type Page = {
   kind: "front" | "toc" | "chapter" | "interlude" | "end";
@@ -398,11 +399,13 @@ export function Book({ onFinish }: { onFinish: () => void }) {
 
   const next = () => {
     if (index >= PAGES.length - 1) {
+      playPageTurn(1);
       onFinish();
       return;
     }
     setDirection(1);
     const nextIndex = index + 1;
+    playPageTurn(1);
     setIndex(nextIndex);
     if (BUG_AT[nextIndex] !== undefined) setBug(BUG_AT[nextIndex]);
   };
@@ -410,6 +413,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
   const prev = () => {
     if (index === 0) return;
     setDirection(-1);
+    playPageTurn(-1);
     setIndex((i) => i - 1);
   };
 
