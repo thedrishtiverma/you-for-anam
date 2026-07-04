@@ -25,14 +25,9 @@ export function Intro({ onOpen }: { onOpen: () => void }) {
           A note before the book
         </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="font-serif-display text-3xl md:text-4xl ink-text leading-snug mb-10"
-        >
+        <h1 className="font-serif-display text-3xl md:text-4xl ink-text leading-snug mb-10">
           {LINES[0]}
-        </motion.h1>
+        </h1>
 
         <div className="space-y-4">
           {LINES.slice(1).map((l, i) => (
