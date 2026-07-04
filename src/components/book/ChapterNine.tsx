@@ -96,11 +96,16 @@ export function ChapterNine({ onDone }: { onDone: () => void }) {
                   </div>
                 </div>
 
-                <label className="mt-10 flex items-start gap-3 cursor-pointer select-none">
+                <label
+                  htmlFor="coauthor-agreement"
+                  className="mt-10 flex items-start gap-3 cursor-pointer select-none"
+                >
                   <input
+                    id="coauthor-agreement"
                     type="checkbox"
                     checked={checked}
                     onChange={(e) => setChecked(e.target.checked)}
+                    aria-label="Accept the co-author agreement"
                     className="mt-1 w-4 h-4 accent-ink"
                   />
                   <span className="font-serif-display italic text-ink-soft text-sm">
