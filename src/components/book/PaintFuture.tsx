@@ -77,7 +77,7 @@ export function PaintFuture({ pageNumber, total }: { pageNumber: number; total: 
 
       <div className="relative z-10 text-center pointer-events-none">
         <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">Future</p>
-        <h3 className="font-serif-display text-5xl ink-text mt-1">Currently unwritten.</h3>
+        <h2 className="font-serif-display text-5xl ink-text mt-1">Currently unwritten.</h2>
         <p className="font-serif-display italic text-ink-soft mt-3">Help reveal it.</p>
       </div>
 
