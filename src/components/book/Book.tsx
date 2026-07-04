@@ -400,8 +400,8 @@ export function Book({ onFinish }: { onFinish: () => void }) {
       onFinish();
       return;
     }
-    playTurnSound();
     setDirection(1);
+
     const nextIndex = index + 1;
     setIndex(nextIndex);
     if (BUG_AT[nextIndex] !== undefined) setBug(BUG_AT[nextIndex]);
