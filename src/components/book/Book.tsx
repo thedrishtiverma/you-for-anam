@@ -386,71 +386,11 @@ const PAGES: Page[] = [
 // Bug cards appear after these page indices (sparingly, as per spec).
 const BUG_AT: Record<number, number> = { 4: 0, 8: 1, 11: 2, 13: 3 };
 
-// Gentle synthesized page-turn whisper. No external assets, no autoplay —
-// only fires from a user-initiated next/prev, so browsers allow it.
-function playPageTurn() {
-  try {
-    const AC: typeof AudioContext =
-      (window.AudioContext ||
-        (window as unknown as { webkitAudioContext: typeof AudioContext })
-          .webkitAudioContext);
-    if (!AC) return;
-    const ctx = new AC();
-    const now = ctx.currentTime;
-    const duration = 0.32;
-
-    // Soft noise burst = paper rustle.
-    const bufferSize = Math.floor(ctx.sampleRate * duration);
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < bufferSize; i++) {
-      // pink-ish noise with a gentle swell-then-fade envelope
-      const t = i / bufferSize;
-      const env = Math.sin(Math.PI * t) ** 1.4;
-      data[i] = (Math.random() * 2 - 1) * env * 0.5;
-    }
-    const noise = ctx.createBufferSource();
-    noise.buffer = buffer;
-
-    const bandpass = ctx.createBiquadFilter();
-    bandpass.type = "bandpass";
-    bandpass.frequency.value = 2400;
-    bandpass.Q.value = 0.7;
-
-    const hp = ctx.createBiquadFilter();
-    hp.type = "highpass";
-    hp.frequency.value = 900;
-
-    const gain = ctx.createGain();
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.09, now + 0.04);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-    noise.connect(bandpass);
-    bandpass.connect(hp);
-    hp.connect(gain);
-    gain.connect(ctx.destination);
-
-    noise.start(now);
-    noise.stop(now + duration);
-    noise.onended = () => ctx.close();
-  } catch {
-    // Audio is purely decorative — silently ignore failures.
-  }
-}
-
 export function Book({ onFinish }: { onFinish: () => void }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [bug, setBug] = useState<number | null>(null);
-  const lastTurnSoundAt = useRef<number>(0);
 
-  const playTurnSound = () => {
-    const now = performance.now();
-    if (now - lastTurnSoundAt.current < 420) return;
-    lastTurnSoundAt.current = now;
-    playPageTurn();
-  };
 
 
   const page = PAGES[index];
