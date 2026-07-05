@@ -12,6 +12,7 @@ export function FinalPage({ onReset }: { onReset: () => void }) {
 
   return (
     <div className="paper-grain min-h-screen flex items-center justify-center px-6 py-16 relative overflow-hidden">
+      <h1 className="sr-only">YOU — A First Edition: closing page</h1>
       <AnimatePresence mode="wait">
         {stage === "letter" && (
           <motion.div
