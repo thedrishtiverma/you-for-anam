@@ -422,6 +422,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
 
   return (
     <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-4 py-12 relative">
+      <h1 className="sr-only">YOU — A First Edition: the book</h1>
       <div className="w-full max-w-3xl">
         <motion.div
           className="relative bg-paper rounded-sm book-shadow overflow-hidden touch-pan-y"
