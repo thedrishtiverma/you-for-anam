@@ -4,7 +4,7 @@ export function PrintingPress({ onOpenBook }: { onOpenBook: () => void }) {
   return (
     <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-6 py-20">
       <div className="text-center space-y-3 mb-12">
-        <h2 className="sr-only">Title page — YOU, a first edition for Anam, by Drishti</h2>
+        <p className="sr-only">Title page — YOU, a first edition for Anam, by Drishti</p>
         <Stamp delay={0.2}>
           <h1 className="font-serif-display text-[7rem] md:text-[10rem] leading-none tracking-tight ink-text">
             YOU
