@@ -23,6 +23,7 @@ export function ChapterNine({ onDone }: { onDone: () => void }) {
 
   return (
     <div className="paper-grain min-h-screen flex items-center justify-center px-4 py-12">
+      <h1 className="sr-only">Chapter Nine — The Unwritten Story</h1>
       <div className="w-full max-w-3xl">
         <div
           className="relative bg-paper rounded-sm book-shadow overflow-hidden"
