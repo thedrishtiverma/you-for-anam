@@ -26,6 +26,21 @@ export const Route = createFileRoute("/")({
     links: [
       { rel: "canonical", href: "https://you-for-anam.lovable.app/" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          headline: "YOU — A First Edition",
+          name: "YOU — A First Edition, for Anam",
+          author: { "@type": "Person", name: "Drishti" },
+          description: "A first edition, printed once, for exactly one reader.",
+          url: "https://you-for-anam.lovable.app/",
+          inLanguage: "en",
+        }),
+      },
+    ],
   }),
   component: Index,
 });
