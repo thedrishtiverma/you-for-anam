@@ -470,7 +470,64 @@ export function Book({ onFinish }: { onFinish: () => void }) {
   return (
     <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-4 py-12 relative">
       <h1 className="sr-only">YOU — A First Edition: the book</h1>
+
+      {/* Reading ribbon */}
+      <div className="fixed left-0 right-0 top-0 h-[3px] bg-ink/10 z-20">
+        <motion.div
+          className="h-full bg-wax/70"
+          animate={{ width: `${((index + 1) / PAGES.length) * 100}%` }}
+          transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+        />
+      </div>
+
       <div className="w-full max-w-3xl">
+        {/* Chapter rail */}
+        <div className="mb-3 flex items-center justify-between gap-4">
+          <button
+            onClick={() => setRailOpen((o) => !o)}
+            aria-expanded={railOpen}
+            className="font-mono-term text-[10px] tracking-[0.35em] uppercase text-ink-soft hover:text-ink transition"
+          >
+            {railOpen ? "Close contents" : "Contents"}
+          </button>
+          <span className="font-serif-display italic text-xs text-ink-soft">
+            {page.chapter ?? page.title ?? "—"}
+          </span>
+        </div>
+
+        <AnimatePresence initial={false}>
+          {railOpen && (
+            <motion.ul
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mb-4 overflow-hidden border-y border-ink/10 divide-y divide-ink/5"
+            >
+              {PAGES.map((p, i) =>
+                p.kind === "chapter" || p.kind === "front" ? (
+                  <li key={i}>
+                    <button
+                      onClick={() => {
+                        goTo(i);
+                        setRailOpen(false);
+                      }}
+                      className={`w-full flex items-baseline gap-3 py-2 text-left transition hover:opacity-70 ${
+                        i === index ? "text-ink" : "text-ink-soft"
+                      }`}
+                    >
+                      <span className="font-mono-term text-[10px] uppercase tracking-[0.25em] w-24 shrink-0">
+                        {p.chapter ?? "Front"}
+                      </span>
+                      <span className="font-serif-display text-sm flex-1">{p.title}</span>
+                      <span className="font-serif-display italic text-xs">{i + 1}</span>
+                    </button>
+                  </li>
+                ) : null,
+              )}
+            </motion.ul>
+          )}
+        </AnimatePresence>
+
         <motion.div
           className="relative bg-paper rounded-sm book-shadow overflow-hidden touch-pan-y"
           style={{ aspectRatio: "3 / 4", minHeight: 560 }}
@@ -496,6 +553,15 @@ export function Book({ onFinish }: { onFinish: () => void }) {
               <PageInner page={page} pageNumber={index + 1} total={PAGES.length} />
             </motion.div>
           </AnimatePresence>
+
+          {/* Spine shadow — keeps the single-page spread feeling bound */}
+          <div
+            className="absolute left-0 top-0 bottom-0 w-6 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(90deg, oklch(0.2 0.02 60 / 0.14), transparent)",
+            }}
+          />
 
           <div
             className="absolute top-0 right-0 w-10 h-10 pointer-events-none"
@@ -530,9 +596,42 @@ export function Book({ onFinish }: { onFinish: () => void }) {
         </div>
       </div>
 
+      {/* Bookmark — resume where she left off */}
+      <AnimatePresence>
+        {resumeAt !== null && index === 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 border border-ink/15 bg-paper/95 backdrop-blur-sm rounded-sm px-5 py-3 book-shadow"
+          >
+            <span className="font-serif-display italic text-sm text-ink-soft">
+              You left a bookmark on page {resumeAt + 1}.
+            </span>
+            <button
+              onClick={() => {
+                goTo(resumeAt);
+                setResumeAt(null);
+              }}
+              className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-wax hover:text-ink transition"
+            >
+              Resume
+            </button>
+            <button
+              onClick={() => setResumeAt(null)}
+              aria-label="Dismiss bookmark"
+              className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-ink-soft/70 hover:text-ink transition"
+            >
+              Start over
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>{bug !== null && <BugCard id={bug} />}</AnimatePresence>
     </div>
   );
+
 }
 
 function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number; total: number }) {
