@@ -64,6 +64,17 @@ export function ErrorPage({ onDone }: { onDone: () => void }) {
                 {Math.floor(progress)}%
               </p>
             </div>
+
+            <div className="pt-2">
+              <button
+                onClick={onDone}
+                aria-label="Skip the loading sequence and go to the book"
+                className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-ink-soft/70 hover:text-ink transition"
+              >
+                Skip the wait →
+              </button>
+            </div>
+
           </div>
         </div>
       </motion.div>
