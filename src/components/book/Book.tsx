@@ -386,14 +386,41 @@ const PAGES: Page[] = [
 // Bug cards appear after these page indices (sparingly, as per spec).
 const BUG_AT: Record<number, number> = { 4: 0, 8: 1, 11: 2, 13: 3 };
 
+const STORAGE_KEY = "you-first-edition:page";
+
 export function Book({ onFinish }: { onFinish: () => void }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [bug, setBug] = useState<number | null>(null);
+  const [resumeAt, setResumeAt] = useState<number | null>(null);
+  const [railOpen, setRailOpen] = useState(false);
 
+  // Resume: offer to return to the furthest page read, never jump silently.
+  useEffect(() => {
+    try {
+      const saved = Number(localStorage.getItem(STORAGE_KEY));
+      if (Number.isFinite(saved) && saved > 0 && saved < PAGES.length) setResumeAt(saved);
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, String(index));
+    } catch {
+      /* storage unavailable */
+    }
+  }, [index]);
 
   const page = PAGES[index];
+
+  const goTo = (target: number) => {
+    if (target === index) return;
+    setDirection(target > index ? 1 : -1);
+    setIndex(target);
+    if (BUG_AT[target] !== undefined) setBug(BUG_AT[target]);
+  };
 
   const next = () => {
     if (index >= PAGES.length - 1) {
@@ -414,11 +441,31 @@ export function Book({ onFinish }: { onFinish: () => void }) {
     setIndex((i) => i - 1);
   };
 
+  // Keyboard navigation — the page footer promises arrows, so honour them.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const el = document.activeElement;
+      if (el instanceof HTMLElement && /INPUT|TEXTAREA/.test(el.tagName)) return;
+      if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+        e.preventDefault();
+        next();
+      } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+        e.preventDefault();
+        prev();
+      } else if (e.key === "Escape") {
+        setRailOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
+
   useEffect(() => {
     if (bug === null) return;
     const id = setTimeout(() => setBug(null), 3600);
     return () => clearTimeout(id);
   }, [bug]);
+
 
   return (
     <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-4 py-12 relative">
