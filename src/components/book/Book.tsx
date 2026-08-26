@@ -1,6 +1,9 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
 import { useEffect, useState, type ReactNode } from "react";
 import { BugCard, BUG_CARDS } from "./BugCard";
+import { MarginNote } from "./MarginNote";
+import { StagedLines } from "./StagedLines";
+
 
 type Page = {
   kind: "front" | "toc" | "chapter" | "interlude" | "end";
@@ -232,35 +235,38 @@ const Interlude2 = () => (
 
 const Ch6 = () => (
   <Prose>
-    <p>
-      Class nine. 2019. An ordinary afternoon I would not have remembered
-      otherwise.
-    </p>
-    <p>
-      I was upset about something. I don't think I'd planned to say a word.
-      And then, somehow, I told you everything — things from my past I had
-      never said out loud to anyone, not by myself, not first.
-    </p>
-    <p>
-      You were fifteen. You had no business being that mature. But you
-      listened the way you always listen — without flinching, without rushing
-      to fix it, without making it about you. And somewhere inside that
-      conversation I understood that some people are safe in a way most
-      people simply aren't.
-    </p>
-    <p>
-      I think that was the day the weather quietly changed.
-    </p>
-    <p>
-      Seven years later I can say it plainly: a particular version of my life
-      would not exist without that afternoon, or without you.
-    </p>
-    <p className="font-serif-display italic text-ink-soft pt-2">
-      Some friendships are not events.<br />They are climates.
-    </p>
-    <Signature>YOU are... quietly unforgettable.</Signature>
+    <StagedLines>
+      <p>
+        Class nine. 2019. An ordinary afternoon I would not have remembered
+        otherwise.
+      </p>
+      <p>
+        I was upset about something. I don't think I'd planned to say a word.
+        And then, somehow, I told you everything — things from my past I had
+        never said out loud to anyone, not by myself, not first.
+      </p>
+      <p>
+        You were fifteen. You had no business being that mature. But you
+        listened the way you always listen — without flinching, without rushing
+        to fix it, without making it about you. And somewhere inside that
+        conversation I understood that some people are safe in a way most
+        people simply aren't.
+      </p>
+      <p>
+        I think that was the day the weather quietly changed.
+      </p>
+      <p>
+        Seven years later I can say it plainly: a particular version of my life
+        would not exist without that afternoon, or without you.
+      </p>
+      <p className="font-serif-display italic text-ink-soft pt-2">
+        Some friendships are not events.<br />They are climates.
+      </p>
+      <Signature>YOU are... quietly unforgettable.</Signature>
+    </StagedLines>
   </Prose>
 );
+
 
 const Ch7 = () => (
   <Prose>
