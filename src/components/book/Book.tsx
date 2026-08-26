@@ -1,6 +1,9 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
 import { useEffect, useState, type ReactNode } from "react";
 import { BugCard, BUG_CARDS } from "./BugCard";
+import { MarginNote } from "./MarginNote";
+import { StagedLines } from "./StagedLines";
+
 
 type Page = {
   kind: "front" | "toc" | "chapter" | "interlude" | "end";
@@ -63,6 +66,8 @@ const Ch1 = () => (
     <p>
       Friendship, if you are honest about it, is mostly a numbers problem.
     </p>
+    <MarginNote>I checked this math twice.</MarginNote>
+
     <ul className="space-y-2 font-serif-body not-prose">
       <li className="flex justify-between gap-4 border-b border-dotted border-ink/20 pb-1">
         <span>People met</span>
@@ -101,6 +106,8 @@ const Ch2 = () => (
       their phone stops mattering, they ask the small follow-up question that
       proves they were actually there.
     </p>
+    <MarginNote>you do this without knowing you do it.</MarginNote>
+
     <p>
       Most people listen to reply. A few listen to understand. A very small
       number listen because they genuinely want to know how your week was, and
@@ -232,35 +239,38 @@ const Interlude2 = () => (
 
 const Ch6 = () => (
   <Prose>
-    <p>
-      Class nine. 2019. An ordinary afternoon I would not have remembered
-      otherwise.
-    </p>
-    <p>
-      I was upset about something. I don't think I'd planned to say a word.
-      And then, somehow, I told you everything — things from my past I had
-      never said out loud to anyone, not by myself, not first.
-    </p>
-    <p>
-      You were fifteen. You had no business being that mature. But you
-      listened the way you always listen — without flinching, without rushing
-      to fix it, without making it about you. And somewhere inside that
-      conversation I understood that some people are safe in a way most
-      people simply aren't.
-    </p>
-    <p>
-      I think that was the day the weather quietly changed.
-    </p>
-    <p>
-      Seven years later I can say it plainly: a particular version of my life
-      would not exist without that afternoon, or without you.
-    </p>
-    <p className="font-serif-display italic text-ink-soft pt-2">
-      Some friendships are not events.<br />They are climates.
-    </p>
-    <Signature>YOU are... quietly unforgettable.</Signature>
+    <StagedLines>
+      <p>
+        Class nine. 2019. An ordinary afternoon I would not have remembered
+        otherwise.
+      </p>
+      <p>
+        I was upset about something. I don't think I'd planned to say a word.
+        And then, somehow, I told you everything — things from my past I had
+        never said out loud to anyone, not by myself, not first.
+      </p>
+      <p>
+        You were fifteen. You had no business being that mature. But you
+        listened the way you always listen — without flinching, without rushing
+        to fix it, without making it about you. And somewhere inside that
+        conversation I understood that some people are safe in a way most
+        people simply aren't.
+      </p>
+      <p>
+        I think that was the day the weather quietly changed.
+      </p>
+      <p>
+        Seven years later I can say it plainly: a particular version of my life
+        would not exist without that afternoon, or without you.
+      </p>
+      <p className="font-serif-display italic text-ink-soft pt-2">
+        Some friendships are not events.<br />They are climates.
+      </p>
+      <Signature>YOU are... quietly unforgettable.</Signature>
+    </StagedLines>
   </Prose>
 );
+
 
 const Ch7 = () => (
   <Prose>
@@ -280,9 +290,11 @@ const Ch7 = () => (
       Always cheerful. Almost annoyingly positive. The low-maintenance
       friend everyone claims to want and almost nobody actually is.
     </p>
+    <MarginNote>yes. it's you. it was always you.</MarginNote>
     <p>
       My confidant. My favourite. My girl.
     </p>
+
     <p className="font-hand text-xl text-ink-soft pt-2">
       (Take your time. The next page can wait.)
     </p>
@@ -394,6 +406,14 @@ export function Book({ onFinish }: { onFinish: () => void }) {
   const [bug, setBug] = useState<number | null>(null);
   const [resumeAt, setResumeAt] = useState<number | null>(null);
   const [railOpen, setRailOpen] = useState(false);
+  const reduced = useReducedMotion();
+
+  // Page curl follows the drag: paper bends before it turns.
+  const dragX = useMotionValue(0);
+  const curl = useTransform(dragX, [-180, 0, 180], [-14, 0, 14]);
+  const curlShade = useTransform(dragX, [-180, -20, 0, 20, 180], [0.5, 0, 0, 0, 0.5]);
+
+
 
   // Resume: offer to return to the furthest page read, never jump silently.
   useEffect(() => {
@@ -529,12 +549,14 @@ export function Book({ onFinish }: { onFinish: () => void }) {
         </AnimatePresence>
 
         <motion.div
-          className="relative bg-paper rounded-sm book-shadow overflow-hidden touch-pan-y"
+          className="relative bg-paper rounded-sm book-shadow overflow-hidden touch-pan-y [perspective:1400px]"
           style={{ aspectRatio: "3 / 4", minHeight: 560 }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.15}
+          onDrag={(_, info) => dragX.set(info.offset.x)}
           onDragEnd={(_, info) => {
+            dragX.set(0);
             if (info.offset.x < -60 || info.velocity.x < -300) next();
             else if (info.offset.x > 60 || info.velocity.x > 300) prev();
           }}
@@ -543,12 +565,12 @@ export function Book({ onFinish }: { onFinish: () => void }) {
             <motion.div
               key={index}
               custom={direction}
-              initial={{ rotateY: direction > 0 ? 22 : -22, opacity: 0, x: direction > 0 ? 36 : -36 }}
+              initial={reduced ? { opacity: 0 } : { rotateY: direction > 0 ? 22 : -22, opacity: 0, x: direction > 0 ? 36 : -36 }}
               animate={{ rotateY: 0, opacity: 1, x: 0 }}
-              exit={{ rotateY: direction > 0 ? -22 : 22, opacity: 0, x: direction > 0 ? -36 : 36 }}
-              transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+              exit={reduced ? { opacity: 0 } : { rotateY: direction > 0 ? -22 : 22, opacity: 0, x: direction > 0 ? -36 : 36 }}
+              transition={{ duration: reduced ? 0.25 : 0.7, ease: [0.32, 0.72, 0, 1] }}
               className="absolute inset-0 origin-left"
-              style={{ transformStyle: "preserve-3d" }}
+              style={{ transformStyle: "preserve-3d", rotateY: reduced ? 0 : curl }}
             >
               <PageInner page={page} pageNumber={index + 1} total={PAGES.length} />
             </motion.div>
@@ -563,6 +585,16 @@ export function Book({ onFinish }: { onFinish: () => void }) {
             }}
           />
 
+          {/* Curl shading follows the drag in real time */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              opacity: curlShade,
+              background:
+                "linear-gradient(270deg, oklch(0.2 0.02 60 / 0.45), transparent 45%)",
+            }}
+          />
+
           <div
             className="absolute top-0 right-0 w-10 h-10 pointer-events-none"
             style={{
@@ -572,6 +604,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
             }}
           />
         </motion.div>
+
 
         <div className="mt-6 flex items-center justify-between">
           <button
