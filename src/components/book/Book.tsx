@@ -541,12 +541,14 @@ export function Book({ onFinish }: { onFinish: () => void }) {
         </AnimatePresence>
 
         <motion.div
-          className="relative bg-paper rounded-sm book-shadow overflow-hidden touch-pan-y"
+          className="relative bg-paper rounded-sm book-shadow overflow-hidden touch-pan-y [perspective:1400px]"
           style={{ aspectRatio: "3 / 4", minHeight: 560 }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.15}
+          onDrag={(_, info) => dragX.set(info.offset.x)}
           onDragEnd={(_, info) => {
+            dragX.set(0);
             if (info.offset.x < -60 || info.velocity.x < -300) next();
             else if (info.offset.x > 60 || info.velocity.x > 300) prev();
           }}
@@ -555,12 +557,12 @@ export function Book({ onFinish }: { onFinish: () => void }) {
             <motion.div
               key={index}
               custom={direction}
-              initial={{ rotateY: direction > 0 ? 22 : -22, opacity: 0, x: direction > 0 ? 36 : -36 }}
+              initial={reduced ? { opacity: 0 } : { rotateY: direction > 0 ? 22 : -22, opacity: 0, x: direction > 0 ? 36 : -36 }}
               animate={{ rotateY: 0, opacity: 1, x: 0 }}
-              exit={{ rotateY: direction > 0 ? -22 : 22, opacity: 0, x: direction > 0 ? -36 : 36 }}
-              transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+              exit={reduced ? { opacity: 0 } : { rotateY: direction > 0 ? -22 : 22, opacity: 0, x: direction > 0 ? -36 : 36 }}
+              transition={{ duration: reduced ? 0.25 : 0.7, ease: [0.32, 0.72, 0, 1] }}
               className="absolute inset-0 origin-left"
-              style={{ transformStyle: "preserve-3d" }}
+              style={{ transformStyle: "preserve-3d", rotateY: reduced ? 0 : curl }}
             >
               <PageInner page={page} pageNumber={index + 1} total={PAGES.length} />
             </motion.div>
@@ -575,6 +577,16 @@ export function Book({ onFinish }: { onFinish: () => void }) {
             }}
           />
 
+          {/* Curl shading follows the drag in real time */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              opacity: curlShade,
+              background:
+                "linear-gradient(270deg, oklch(0.2 0.02 60 / 0.45), transparent 45%)",
+            }}
+          />
+
           <div
             className="absolute top-0 right-0 w-10 h-10 pointer-events-none"
             style={{
@@ -584,6 +596,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
             }}
           />
         </motion.div>
+
 
         <div className="mt-6 flex items-center justify-between">
           <button
