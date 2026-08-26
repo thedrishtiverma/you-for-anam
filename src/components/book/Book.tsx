@@ -406,6 +406,14 @@ export function Book({ onFinish }: { onFinish: () => void }) {
   const [bug, setBug] = useState<number | null>(null);
   const [resumeAt, setResumeAt] = useState<number | null>(null);
   const [railOpen, setRailOpen] = useState(false);
+  const reduced = useReducedMotion();
+
+  // Page curl follows the drag: paper bends before it turns.
+  const dragX = useMotionValue(0);
+  const curl = useTransform(dragX, [-180, 0, 180], [-14, 0, 14]);
+  const curlShade = useTransform(dragX, [-180, -20, 0, 20, 180], [0.5, 0, 0, 0, 0.5]);
+
+
 
   // Resume: offer to return to the furthest page read, never jump silently.
   useEffect(() => {
