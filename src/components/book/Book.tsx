@@ -66,6 +66,8 @@ const Ch1 = () => (
     <p>
       Friendship, if you are honest about it, is mostly a numbers problem.
     </p>
+    <MarginNote>I checked this math twice.</MarginNote>
+
     <ul className="space-y-2 font-serif-body not-prose">
       <li className="flex justify-between gap-4 border-b border-dotted border-ink/20 pb-1">
         <span>People met</span>
@@ -104,6 +106,8 @@ const Ch2 = () => (
       their phone stops mattering, they ask the small follow-up question that
       proves they were actually there.
     </p>
+    <MarginNote>you do this without knowing you do it.</MarginNote>
+
     <p>
       Most people listen to reply. A few listen to understand. A very small
       number listen because they genuinely want to know how your week was, and
@@ -286,9 +290,11 @@ const Ch7 = () => (
       Always cheerful. Almost annoyingly positive. The low-maintenance
       friend everyone claims to want and almost nobody actually is.
     </p>
+    <MarginNote>yes. it's you. it was always you.</MarginNote>
     <p>
       My confidant. My favourite. My girl.
     </p>
+
     <p className="font-hand text-xl text-ink-soft pt-2">
       (Take your time. The next page can wait.)
     </p>
