@@ -4,11 +4,17 @@ import confetti from "canvas-confetti";
 
 type Stage = "appendix" | "agreement" | "ask" | "done";
 
-export function ChapterNine({ onDone }: { onDone: () => void }) {
+export function ChapterNine({
+  onDone,
+}: {
+  onDone: (answer: string) => void;
+}) {
   const [stage, setStage] = useState<Stage>("appendix");
   const [checked, setChecked] = useState(false);
+  const [answer, setAnswer] = useState("Yes");
 
-  const accept = () => {
+  const accept = (chosen: string) => {
+    setAnswer(chosen);
     confetti({
       particleCount: 120,
       spread: 80,
@@ -18,7 +24,7 @@ export function ChapterNine({ onDone }: { onDone: () => void }) {
       ticks: 200,
     });
     setStage("done");
-    setTimeout(onDone, 2800);
+    setTimeout(() => onDone(chosen), 3400);
   };
 
   return (
@@ -135,8 +141,8 @@ export function ChapterNine({ onDone }: { onDone: () => void }) {
                     <span className="italic">over bhutta and hot tea, the next time the rain agrees?</span>
                   </p>
                   <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
-                    <BookButton onClick={accept}>❤  Yes</BookButton>
-                    <BookButton onClick={accept} variant="solid">
+                    <BookButton onClick={() => accept("Yes")}>❤  Yes</BookButton>
+                    <BookButton onClick={() => accept("Definitely Yes")} variant="solid">
                       ❤  Definitely Yes
                     </BookButton>
                   </div>
@@ -164,6 +170,22 @@ export function ChapterNine({ onDone }: { onDone: () => void }) {
                   <p className="font-serif-body text-ink-soft">
                     The rest of this chapter will be written in person.
                   </p>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.1, duration: 0.8 }}
+                    className="font-hand text-2xl text-ink pt-4"
+                  >
+                    She said “{answer}.”
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.9, duration: 0.8 }}
+                    className="font-serif-display italic text-ink-soft text-sm"
+                  >
+                    Noted, in ink, on the record.
+                  </motion.p>
                 </motion.div>
               </PageFrame>
             )}
