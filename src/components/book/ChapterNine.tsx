@@ -170,6 +170,22 @@ export function ChapterNine({
                   <p className="font-serif-body text-ink-soft">
                     The rest of this chapter will be written in person.
                   </p>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.1, duration: 0.8 }}
+                    className="font-hand text-2xl text-ink pt-4"
+                  >
+                    She said “{answer}.”
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.9, duration: 0.8 }}
+                    className="font-serif-display italic text-ink-soft text-sm"
+                  >
+                    Noted, in ink, on the record.
+                  </motion.p>
                 </motion.div>
               </PageFrame>
             )}
