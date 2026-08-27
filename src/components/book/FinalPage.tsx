@@ -85,15 +85,49 @@ export function FinalPage({
                   written, and to the one we still have to write — over bhutta
                   and hot tea, the next time June and the rain agree on a date.
                 </p>
+                <p className="text-ink-soft">
+                  And for the record, when I asked, you said “{answer}.”
+                </p>
               </div>
               <p className="mt-10 font-hand text-2xl text-ink text-right">— Drishti</p>
+
+              <div className="mt-10 pt-6 border-t border-ink/10">
+                <p className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-ink-soft">
+                  Ownership Plate
+                </p>
+                <p className="font-serif-display italic text-ink-soft text-sm mt-1">
+                  This copy belongs to
+                </p>
+                <label htmlFor="owner-signature" className="sr-only">
+                  Sign your name
+                </label>
+                <input
+                  id="owner-signature"
+                  value={signature}
+                  onChange={(e) => setSignature(e.target.value)}
+                  placeholder="sign here"
+                  maxLength={32}
+                  className="mt-2 w-full bg-transparent border-b border-ink/25 focus:border-ink/60 outline-none font-hand text-3xl text-ink placeholder:text-ink/25 pb-1"
+                />
+                <div className="mt-3 flex items-center justify-between font-mono-term text-[10px] tracking-[0.25em] uppercase text-ink-soft">
+                  <span>No. 001 of 001</span>
+                  <span>{signedOn}</span>
+                </div>
+              </div>
+
               <p className="mt-8 pt-4 border-t border-ink/10 font-serif-display italic text-base text-ink">
                 <span className="font-mono-term not-italic tracking-[0.3em] text-[10px] uppercase text-wax mr-2">⸻</span>
                 YOU are... my favorite chapter.
               </p>
             </div>
 
-            <div className="mt-10 text-center">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 no-print">
+              <button
+                onClick={() => window.print()}
+                className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-ink-soft hover:text-ink transition"
+              >
+                Print this copy
+              </button>
               <button
                 onClick={() => setStage("closing")}
                 className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-ink-soft hover:text-ink transition"
