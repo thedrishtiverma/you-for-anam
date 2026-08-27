@@ -1,8 +1,40 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function FinalPage({ onReset }: { onReset: () => void }) {
+const SIGN_KEY = "you-first-edition:signature";
+
+export function FinalPage({
+  onReset,
+  answer = "Yes",
+}: {
+  onReset: () => void;
+  answer?: string;
+}) {
   const [stage, setStage] = useState<"letter" | "closing" | "cover">("letter");
+  const [signature, setSignature] = useState("");
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(SIGN_KEY);
+      if (saved) setSignature(saved);
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (signature) localStorage.setItem(SIGN_KEY, signature);
+    } catch {
+      /* storage unavailable */
+    }
+  }, [signature]);
+
+  const signedOn = new Date().toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   useEffect(() => {
     if (stage !== "closing") return;
