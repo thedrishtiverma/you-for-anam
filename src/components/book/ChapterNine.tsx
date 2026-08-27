@@ -141,8 +141,8 @@ export function ChapterNine({
                     <span className="italic">over bhutta and hot tea, the next time the rain agrees?</span>
                   </p>
                   <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
-                    <BookButton onClick={accept}>❤  Yes</BookButton>
-                    <BookButton onClick={accept} variant="solid">
+                    <BookButton onClick={() => accept("Yes")}>❤  Yes</BookButton>
+                    <BookButton onClick={() => accept("Definitely Yes")} variant="solid">
                       ❤  Definitely Yes
                     </BookButton>
                   </div>
