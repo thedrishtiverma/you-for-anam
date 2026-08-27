@@ -144,3 +144,23 @@
   border-radius: 50%;
   animation: float-dust linear infinite;
 }
+
+/* Keepsake print: a clean page you can actually keep */
+@media print {
+  @page { margin: 18mm; }
+  html, body {
+    background: #fff !important;
+    color: #1a1a1a !important;
+  }
+  .no-print { display: none !important; }
+  main { overflow: visible !important; }
+  .paper-grain, .paper-grain-soft {
+    background-image: none !important;
+    background-color: #fff !important;
+  }
+  .book-shadow, .shadow-md { box-shadow: none !important; }
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
