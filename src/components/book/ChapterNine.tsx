@@ -4,11 +4,17 @@ import confetti from "canvas-confetti";
 
 type Stage = "appendix" | "agreement" | "ask" | "done";
 
-export function ChapterNine({ onDone }: { onDone: () => void }) {
+export function ChapterNine({
+  onDone,
+}: {
+  onDone: (answer: string) => void;
+}) {
   const [stage, setStage] = useState<Stage>("appendix");
   const [checked, setChecked] = useState(false);
+  const [answer, setAnswer] = useState("Yes");
 
-  const accept = () => {
+  const accept = (chosen: string) => {
+    setAnswer(chosen);
     confetti({
       particleCount: 120,
       spread: 80,
