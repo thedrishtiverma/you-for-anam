@@ -49,6 +49,7 @@ type Stage = "intro" | "error" | "press" | "book" | "chapter9" | "final";
 
 function Index() {
   const [stage, setStage] = useState<Stage>("intro");
+  const [answer, setAnswer] = useState("Yes");
 
   return (
     <main className="min-h-screen bg-paper text-ink overflow-hidden">
