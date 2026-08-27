@@ -65,8 +65,17 @@ function Index() {
           {stage === "error" && <ErrorPage onDone={() => setStage("press")} />}
           {stage === "press" && <PrintingPress onOpenBook={() => setStage("book")} />}
           {stage === "book" && <Book onFinish={() => setStage("chapter9")} />}
-          {stage === "chapter9" && <ChapterNine onDone={() => setStage("final")} />}
-          {stage === "final" && <FinalPage onReset={() => setStage("intro")} />}
+          {stage === "chapter9" && (
+            <ChapterNine
+              onDone={(a) => {
+                setAnswer(a);
+                setStage("final");
+              }}
+            />
+          )}
+          {stage === "final" && (
+            <FinalPage answer={answer} onReset={() => setStage("intro")} />
+          )}
         </motion.div>
       </AnimatePresence>
     </main>
