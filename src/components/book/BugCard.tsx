@@ -6,7 +6,7 @@ export const BUG_CARDS = [
   { id: 0, tag: "Printer's Note", body: "The author smiled while typesetting this page." },
   { id: 1, tag: "Editorial Revision", body: "Originally: \"favourite people.\" Current version: \"favourite person.\"" },
   { id: 2, tag: "Printing Delay", body: "The ink needed a moment to admire the subject." },
-  { id: 3, tag: "Known Issue", body: "Difficult to write about her without overusing the word real." },
+  { id: 3, tag: "Known Issue", body: "Difficult to write about her without overusing the word kind." },
   { id: 4, tag: "Margin Note", body: "Seven years and counting. Still her first wish, every June." },
 ];
 
