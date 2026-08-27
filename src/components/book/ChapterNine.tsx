@@ -24,7 +24,7 @@ export function ChapterNine({
       ticks: 200,
     });
     setStage("done");
-    setTimeout(onDone, 2800);
+    setTimeout(() => onDone(chosen), 3400);
   };
 
   return (
