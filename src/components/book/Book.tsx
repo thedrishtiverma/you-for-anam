@@ -3,6 +3,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { BugCard, BUG_CARDS } from "./BugCard";
 import { MarginNote } from "./MarginNote";
 import { StagedLines } from "./StagedLines";
+import { ArtifactPage } from "./Artifacts";
 
 
 type Page = {
