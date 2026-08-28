@@ -3,6 +3,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { BugCard, BUG_CARDS } from "./BugCard";
 import { MarginNote } from "./MarginNote";
 import { StagedLines } from "./StagedLines";
+import { ArtifactPage } from "./Artifacts";
 
 
 type Page = {
@@ -388,6 +389,7 @@ const PAGES: Page[] = [
   { kind: "chapter", part: "Part II — Evidence", chapter: "Chapter Four", title: "Museum of Small Moments", body: <Ch4 /> },
   { kind: "chapter", part: "Part II", chapter: "Chapter Five", title: "What Makes Someone Rare?", body: <Ch5 /> },
   { kind: "interlude", body: <Interlude2 /> },
+  { kind: "interlude", title: "Artifacts", body: <ArtifactPage /> },
   { kind: "chapter", part: "Part III — The Experiment", chapter: "Chapter Six", title: "The Butterfly Effect", body: <Ch6 /> },
   { kind: "chapter", part: "Part III", chapter: "Chapter Seven", title: "Reader Exercise", body: <Ch7 /> },
   { kind: "interlude", body: <Interlude3 /> },
@@ -396,7 +398,8 @@ const PAGES: Page[] = [
 ];
 
 // Bug cards appear after these page indices (sparingly, as per spec).
-const BUG_AT: Record<number, number> = { 4: 0, 8: 1, 11: 2, 13: 3 };
+const BUG_AT: Record<number, number> = { 4: 0, 8: 1, 12: 2, 14: 3 };
+
 
 const STORAGE_KEY = "you-first-edition:page";
 
@@ -499,6 +502,48 @@ export function Book({ onFinish }: { onFinish: () => void }) {
           transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
         />
       </div>
+
+      {/* Wax bookmark — offers to return to where she left off */}
+      <AnimatePresence>
+        {resumeAt !== null && index === 0 && (
+          <motion.div
+            initial={{ y: -60, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -60, opacity: 0 }}
+            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+            className="fixed right-6 top-0 z-30 w-[210px]"
+          >
+            <div
+              className="px-4 pt-4 pb-6 text-paper shadow-md"
+              style={{
+                background: "var(--wax)",
+                clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 86%, 0 100%)",
+              }}
+            >
+              <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase opacity-80">
+                Bookmark
+              </p>
+              <button
+                onClick={() => {
+                  goTo(resumeAt);
+                  setResumeAt(null);
+                }}
+                className="mt-1 block text-left font-serif-display italic text-lg leading-tight hover:opacity-80 transition"
+              >
+                Return to page {resumeAt + 1}
+              </button>
+              <button
+                onClick={() => setResumeAt(null)}
+                className="mt-1 font-mono-term text-[9px] tracking-[0.25em] uppercase opacity-70 hover:opacity-100 transition"
+              >
+                Start again
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
 
       <div className="w-full max-w-3xl">
         {/* Chapter rail */}
