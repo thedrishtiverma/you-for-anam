@@ -388,6 +388,7 @@ const PAGES: Page[] = [
   { kind: "chapter", part: "Part II — Evidence", chapter: "Chapter Four", title: "Museum of Small Moments", body: <Ch4 /> },
   { kind: "chapter", part: "Part II", chapter: "Chapter Five", title: "What Makes Someone Rare?", body: <Ch5 /> },
   { kind: "interlude", body: <Interlude2 /> },
+  { kind: "interlude", body: <Artifacts /> },
   { kind: "chapter", part: "Part III — The Experiment", chapter: "Chapter Six", title: "The Butterfly Effect", body: <Ch6 /> },
   { kind: "chapter", part: "Part III", chapter: "Chapter Seven", title: "Reader Exercise", body: <Ch7 /> },
   { kind: "interlude", body: <Interlude3 /> },
