@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const LINES = [
   "A Very Very Very Happy Birthday, Anam 🥳❤️🫂🧿",
@@ -11,10 +12,67 @@ const LINES = [
   "So I made you this.",
 ];
 
-export function Intro({ onOpen }: { onOpen: () => void }) {
+export function Intro({
+  onOpen,
+  onResume,
+}: {
+  onOpen: () => void;
+  onResume?: (page: number) => void;
+}) {
+  const [resumeAt, setResumeAt] = useState<number | null>(null);
+
+  useEffect(() => {
+    try {
+      const saved = Number(localStorage.getItem("you-first-edition:page"));
+      if (Number.isFinite(saved) && saved > 0) setResumeAt(saved);
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
+
   return (
     <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-6 py-16 relative overflow-hidden">
       <DustField />
+
+      {/* Wax bookmark — she stopped somewhere; offer the way back */}
+      <AnimatePresence>
+        {resumeAt !== null && onResume && (
+          <motion.div
+            initial={{ y: -70, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -70, opacity: 0 }}
+            transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+            className="absolute right-6 top-0 z-30 w-[210px] no-print"
+          >
+            <div
+              className="px-4 pt-4 pb-7 text-paper shadow-md"
+              style={{
+                background: "var(--wax)",
+                clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 86%, 0 100%)",
+              }}
+            >
+              <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase opacity-80">
+                Bookmark
+              </p>
+              <p className="mt-1 font-serif-display italic text-sm leading-tight opacity-90">
+                You stopped at page {resumeAt + 1}.
+              </p>
+              <button
+                onClick={() => onResume(resumeAt)}
+                className="mt-2 block text-left font-serif-display italic text-lg leading-tight hover:opacity-80 transition"
+              >
+                Return →
+              </button>
+              <button
+                onClick={() => setResumeAt(null)}
+                className="mt-1 font-mono-term text-[9px] tracking-[0.25em] uppercase opacity-70 hover:opacity-100 transition"
+              >
+                Start again
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="max-w-2xl w-full text-center relative">
         <motion.p
           initial={{ opacity: 0, y: -8 }}

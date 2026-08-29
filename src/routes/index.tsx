@@ -50,6 +50,7 @@ type Stage = "intro" | "error" | "press" | "book" | "chapter9" | "final";
 function Index() {
   const [stage, setStage] = useState<Stage>("intro");
   const [answer, setAnswer] = useState("Yes");
+  const [startPage, setStartPage] = useState(0);
 
   return (
     <main className="min-h-screen bg-paper text-ink overflow-hidden">
@@ -61,10 +62,23 @@ function Index() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.7 }}
         >
-          {stage === "intro" && <Intro onOpen={() => setStage("error")} />}
+          {stage === "intro" && (
+            <Intro
+              onOpen={() => {
+                setStartPage(0);
+                setStage("error");
+              }}
+              onResume={(p) => {
+                setStartPage(p);
+                setStage("book");
+              }}
+            />
+          )}
           {stage === "error" && <ErrorPage onDone={() => setStage("press")} />}
           {stage === "press" && <PrintingPress onOpenBook={() => setStage("book")} />}
-          {stage === "book" && <Book onFinish={() => setStage("chapter9")} />}
+          {stage === "book" && (
+            <Book initialPage={startPage} onFinish={() => setStage("chapter9")} />
+          )}
           {stage === "chapter9" && (
             <ChapterNine
               onDone={(a) => {
