@@ -3,7 +3,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { BugCard, BUG_CARDS } from "./BugCard";
 import { MarginNote } from "./MarginNote";
 import { StagedLines } from "./StagedLines";
-import { ArtifactPage } from "./Artifacts";
+import { ArtifactPage, LibraryCardPage } from "./Artifacts";
 
 
 type Page = {
@@ -393,6 +393,7 @@ const PAGES: Page[] = [
   { kind: "chapter", part: "Part III — The Experiment", chapter: "Chapter Six", title: "The Butterfly Effect", body: <Ch6 /> },
   { kind: "chapter", part: "Part III", chapter: "Chapter Seven", title: "Reader Exercise", body: <Ch7 /> },
   { kind: "interlude", body: <Interlude3 /> },
+  { kind: "interlude", title: "Artifacts II", body: <LibraryCardPage /> },
   { kind: "chapter", part: "Part IV — The Missing Chapter", chapter: "Chapter Eight", title: "Happy Birthday.", body: <Ch8 /> },
   { kind: "end" },
 ];
