@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 /**
@@ -156,5 +157,96 @@ function PressedFlower() {
         <circle cx="60" cy="44" r="6" fill="oklch(0.72 0.12 80 / 0.7)" />
       </g>
     </svg>
+  );
+}
+
+/**
+ * A second artifacts page: a library due-date card stamped every year
+ * since 2019, and a folded chit that unfolds on click.
+ */
+export function LibraryCardPage() {
+  return (
+    <div className="relative h-full w-full overflow-y-auto px-8 py-10 md:px-12">
+      <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
+        Filed at the back of the book
+      </p>
+
+      <div className="mt-8 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 18, rotate: -3 }}
+          animate={{ opacity: 1, y: 0, rotate: -1.5 }}
+          transition={{ duration: 0.9 }}
+          className="w-[260px] paper-grain-soft border border-ink/20 px-5 py-5 shadow-md"
+          style={{ boxShadow: "0 14px 26px -16px oklch(0.2 0.02 60 / 0.5)" }}
+        >
+          <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft text-center">
+            Date Due
+          </p>
+          <div className="my-3 border-t border-ink/20" />
+          <div className="space-y-2">
+            {[2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026].map((y, i) => (
+              <div
+                key={y}
+                className="flex items-center justify-between border-b border-dashed border-ink/15 pb-1"
+              >
+                <span className="font-mono-term text-[11px] text-ink tabular-nums">
+                  28 JUN {y}
+                </span>
+                <span
+                  className="font-mono-term text-[9px] tracking-[0.2em] uppercase text-wax/80"
+                  style={{ transform: `rotate(${(i % 3) - 1}deg)` }}
+                >
+                  Renewed
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-center font-mono-term text-[9px] tracking-[0.25em] uppercase text-ink-soft">
+            Never returned
+          </p>
+        </motion.div>
+
+        <FoldedChit />
+      </div>
+    </div>
+  );
+}
+
+function FoldedChit() {
+  const [open, setOpen] = useState(false);
+  return (
+    <motion.button
+      type="button"
+      onClick={() => setOpen((o) => !o)}
+      initial={{ opacity: 0, y: 18, rotate: 4 }}
+      animate={{ opacity: 1, y: 0, rotate: 2 }}
+      transition={{ duration: 0.9, delay: 0.2 }}
+      aria-expanded={open}
+      aria-label={open ? "Fold the note back up" : "Unfold the folded note"}
+      className="w-[250px] text-left paper-grain-soft border border-ink/20 px-5 py-4 shadow-md"
+      style={{ boxShadow: "0 12px 22px -14px oklch(0.2 0.02 60 / 0.45)" }}
+    >
+      <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft">
+        Folded note — {open ? "tap to fold" : "tap to unfold"}
+      </p>
+      <motion.div
+        animate={{ height: open ? "auto" : 26, opacity: open ? 1 : 0.55 }}
+        transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+        className="overflow-hidden"
+      >
+        <p className="mt-2 font-hand text-2xl leading-snug text-ink">
+          passed under the desk, Class IX:
+        </p>
+        <p className="mt-2 font-hand text-2xl leading-snug text-ink/90">
+          “vaibhavi se abhi bhi vahi wali dosti h?”
+        </p>
+        <p className="mt-3 font-hand text-xl text-ink-soft">
+          still unanswered, seven years on.
+        </p>
+      </motion.div>
+      {!open && (
+        <div className="mt-2 h-px w-full bg-ink/15" aria-hidden="true" />
+      )}
+    </motion.button>
   );
 }
