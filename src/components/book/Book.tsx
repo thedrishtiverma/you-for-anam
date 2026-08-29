@@ -532,48 +532,6 @@ export function Book({
         />
       </div>
 
-      {/* Wax bookmark — offers to return to where she left off */}
-      <AnimatePresence>
-        {resumeAt !== null && index === 0 && (
-          <motion.div
-            initial={{ y: -60, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -60, opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-            className="fixed right-6 top-0 z-30 w-[210px]"
-          >
-            <div
-              className="px-4 pt-4 pb-6 text-paper shadow-md"
-              style={{
-                background: "var(--wax)",
-                clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 86%, 0 100%)",
-              }}
-            >
-              <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase opacity-80">
-                Bookmark
-              </p>
-              <button
-                onClick={() => {
-                  goTo(resumeAt);
-                  setResumeAt(null);
-                }}
-                className="mt-1 block text-left font-serif-display italic text-lg leading-tight hover:opacity-80 transition"
-              >
-                Return to page {resumeAt + 1}
-              </button>
-              <button
-                onClick={() => setResumeAt(null)}
-                className="mt-1 font-mono-term text-[9px] tracking-[0.25em] uppercase opacity-70 hover:opacity-100 transition"
-              >
-                Start again
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-
-
       <div className="w-full max-w-3xl">
         {/* Chapter rail */}
         <div className="mb-3 flex items-center justify-between gap-4">
@@ -681,6 +639,24 @@ export function Book({
             >
               <PageInner page={page} pageNumber={index + 1} total={PAGES.length} />
             </motion.div>
+          </AnimatePresence>
+
+          {/* Part title card — announces each new Part for a beat */}
+          <AnimatePresence>
+            {partCard && (
+              <motion.div
+                key={partCard}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0 z-10 flex items-center justify-center bg-paper/92 pointer-events-none px-8"
+              >
+                <p className="font-serif-display italic text-2xl md:text-3xl text-ink text-center leading-snug">
+                  {partCard}
+                </p>
+              </motion.div>
+            )}
           </AnimatePresence>
 
           {/* Spine shadow — keeps the single-page spread feeling bound */}
