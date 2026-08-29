@@ -4,6 +4,7 @@ import { BugCard, BUG_CARDS } from "./BugCard";
 import { MarginNote } from "./MarginNote";
 import { StagedLines } from "./StagedLines";
 import { ArtifactPage, LibraryCardPage } from "./Artifacts";
+import { PencilNote } from "./PencilNote";
 
 
 type Page = {
@@ -299,6 +300,7 @@ const Ch7 = () => (
     <p className="font-hand text-xl text-ink-soft pt-2">
       (Take your time. The next page can wait.)
     </p>
+    <PencilNote />
     <Signature>YOU are... one of my favorite people.</Signature>
   </Prose>
 );
@@ -404,8 +406,24 @@ const BUG_AT: Record<number, number> = { 4: 0, 8: 1, 12: 2, 14: 3 };
 
 const STORAGE_KEY = "you-first-edition:page";
 
-export function Book({ onFinish }: { onFinish: () => void }) {
-  const [index, setIndex] = useState(0);
+// Rough minutes of reading left, by page weight.
+function minutesLeft(from: number) {
+  const weight = (p: Page) =>
+    p.kind === "chapter" ? 1.2 : p.kind === "front" ? 0.8 : 0.3;
+  const total = PAGES.slice(from).reduce((sum, p) => sum + weight(p), 0);
+  return Math.max(1, Math.round(total));
+}
+
+export function Book({
+  onFinish,
+  initialPage = 0,
+}: {
+  onFinish: () => void;
+  initialPage?: number;
+}) {
+  const [index, setIndex] = useState(initialPage);
+  const [furthest, setFurthest] = useState(initialPage);
+  const [partCard, setPartCard] = useState<string | null>(null);
   const [direction, setDirection] = useState(1);
   const [bug, setBug] = useState<number | null>(null);
   const [resumeAt, setResumeAt] = useState<number | null>(null);
@@ -435,6 +453,16 @@ export function Book({ onFinish }: { onFinish: () => void }) {
     } catch {
       /* storage unavailable */
     }
+    setFurthest((f) => Math.max(f, index));
+  }, [index]);
+
+  // A part title card announces each new Part, once, for a beat.
+  useEffect(() => {
+    const part = PAGES[index]?.part;
+    if (!part || !part.includes("—")) return;
+    setPartCard(part);
+    const id = setTimeout(() => setPartCard(null), 1400);
+    return () => clearTimeout(id);
   }, [index]);
 
   const page = PAGES[index];
@@ -569,8 +597,25 @@ export function Book({ onFinish }: { onFinish: () => void }) {
               exit={{ opacity: 0, height: 0 }}
               className="mb-4 overflow-hidden border-y border-ink/10 divide-y divide-ink/5"
             >
-              {PAGES.map((p, i) =>
-                p.kind === "chapter" || p.kind === "front" ? (
+              {PAGES.map((p, i) => {
+                const label =
+                  p.chapter ??
+                  (p.kind === "front"
+                    ? "Front"
+                    : p.kind === "toc"
+                      ? "Contents"
+                      : p.kind === "end"
+                        ? "End"
+                        : "Interlude");
+                const title =
+                  p.title ??
+                  (p.kind === "toc"
+                    ? "Table of Contents"
+                    : p.kind === "end"
+                      ? "Colophon"
+                      : "—");
+                const minor = p.kind !== "chapter" && p.kind !== "front";
+                return (
                   <li key={i}>
                     <button
                       onClick={() => {
@@ -582,21 +627,37 @@ export function Book({ onFinish }: { onFinish: () => void }) {
                       }`}
                     >
                       <span className="font-mono-term text-[10px] uppercase tracking-[0.25em] w-24 shrink-0">
-                        {p.chapter ?? "Front"}
+                        {label}
                       </span>
-                      <span className="font-serif-display text-sm flex-1">{p.title}</span>
-                      <span className="font-serif-display italic text-xs">{i + 1}</span>
+                      <span
+                        className={`flex-1 ${
+                          minor
+                            ? "font-serif-display italic text-xs"
+                            : "font-serif-display text-sm"
+                        }`}
+                      >
+                        {title}
+                      </span>
+                      <span className="font-serif-display italic text-xs flex items-center gap-2">
+                        {i === furthest && (
+                          <span
+                            className="inline-block h-1.5 w-1.5 rounded-full bg-wax"
+                            aria-label="furthest page read"
+                          />
+                        )}
+                        {i + 1}
+                      </span>
                     </button>
                   </li>
-                ) : null,
-              )}
+                );
+              })}
             </motion.ul>
           )}
         </AnimatePresence>
 
         <motion.div
           className="relative bg-paper rounded-sm book-shadow overflow-hidden touch-pan-y [perspective:1400px]"
-          style={{ aspectRatio: "3 / 4", minHeight: 560 }}
+          style={{ height: "min(78vh, 780px)", minHeight: 440 }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.15}
@@ -663,6 +724,7 @@ export function Book({ onFinish }: { onFinish: () => void }) {
           </button>
           <span className="font-serif-display italic text-ink-soft text-sm">
             page {index + 1} of {PAGES.length}
+            <span className="ml-2 text-ink-soft/60">· ≈ {minutesLeft(index)} min left</span>
             <span className="hidden md:inline ml-2 text-ink-soft/60">· swipe or use arrows</span>
           </span>
           <button
