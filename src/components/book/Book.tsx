@@ -833,7 +833,7 @@ function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number
 
 function Prose({ children }: { children: ReactNode }) {
   return (
-    <div className="font-serif-body text-ink text-[1.02rem] md:text-[1.08rem] leading-[1.8] space-y-4 max-w-prose">
+    <div className="relative font-serif-body text-ink text-[1.02rem] md:text-[1.08rem] leading-[1.8] space-y-4 max-w-prose">
       {children}
     </div>
   );
