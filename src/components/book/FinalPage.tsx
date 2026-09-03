@@ -95,6 +95,12 @@ export function FinalPage({
                 </p>
                 <p className="text-ink-soft">
                   And for the record, when I asked, you said “{answer}.”
+                  {pencil ? (
+                    <>
+                      {" "}Earlier, in pencil, you wrote “{pencil}.” I kept
+                      that too.
+                    </>
+                  ) : null}
                 </p>
               </div>
               <p className="mt-10 font-hand text-2xl text-ink text-right">— Drishti</p>
