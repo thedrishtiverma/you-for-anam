@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { readPencilNote } from "./PencilNote";
 
 const SIGN_KEY = "you-first-edition:signature";
+const CLOSING_LINE = "YOU are... my favorite chapter.";
 
 export function FinalPage({
   onReset,
@@ -12,6 +14,12 @@ export function FinalPage({
 }) {
   const [stage, setStage] = useState<"letter" | "closing" | "cover">("letter");
   const [signature, setSignature] = useState("");
+  const [pencil, setPencil] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setPencil(readPencilNote());
+  }, []);
 
   useEffect(() => {
     try {
