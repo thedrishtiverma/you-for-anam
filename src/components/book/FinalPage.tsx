@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { readPencilNote } from "./PencilNote";
 
 const SIGN_KEY = "you-first-edition:signature";
+const CLOSING_LINE = "YOU are... my favorite chapter.";
 
 export function FinalPage({
   onReset,
@@ -12,6 +14,12 @@ export function FinalPage({
 }) {
   const [stage, setStage] = useState<"letter" | "closing" | "cover">("letter");
   const [signature, setSignature] = useState("");
+  const [pencil, setPencil] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setPencil(readPencilNote());
+  }, []);
 
   useEffect(() => {
     try {
@@ -87,6 +95,12 @@ export function FinalPage({
                 </p>
                 <p className="text-ink-soft">
                   And for the record, when I asked, you said “{answer}.”
+                  {pencil ? (
+                    <>
+                      {" "}Earlier, in pencil, you wrote “{pencil}.” I kept
+                      that too.
+                    </>
+                  ) : null}
                 </p>
               </div>
               <p className="mt-10 font-hand text-2xl text-ink text-right">— Drishti</p>
@@ -117,8 +131,17 @@ export function FinalPage({
 
               <p className="mt-8 pt-4 border-t border-ink/10 font-serif-display italic text-base text-ink">
                 <span className="font-mono-term not-italic tracking-[0.3em] text-[10px] uppercase text-wax mr-2">⸻</span>
-                YOU are... my favorite chapter.
+                {CLOSING_LINE}
               </p>
+
+              <div className="mt-8 border border-dashed border-ink/20 rounded-sm px-4 py-3 -rotate-1">
+                <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft">
+                  Returns Policy
+                </p>
+                <p className="font-serif-display italic text-sm text-ink mt-1">
+                  This copy may not be returned.
+                </p>
+              </div>
             </div>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 no-print">
@@ -126,7 +149,21 @@ export function FinalPage({
                 onClick={() => window.print()}
                 className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-ink-soft hover:text-ink transition"
               >
-                Print this copy
+                Save as PDF
+              </button>
+              <button
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(CLOSING_LINE);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 1800);
+                  } catch {
+                    /* clipboard unavailable */
+                  }
+                }}
+                className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-ink-soft hover:text-ink transition"
+              >
+                {copied ? "Copied ✓" : "Copy the closing line"}
               </button>
               <button
                 onClick={() => setStage("closing")}
