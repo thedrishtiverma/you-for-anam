@@ -131,8 +131,17 @@ export function FinalPage({
 
               <p className="mt-8 pt-4 border-t border-ink/10 font-serif-display italic text-base text-ink">
                 <span className="font-mono-term not-italic tracking-[0.3em] text-[10px] uppercase text-wax mr-2">⸻</span>
-                YOU are... my favorite chapter.
+                {CLOSING_LINE}
               </p>
+
+              <div className="mt-8 border border-dashed border-ink/20 rounded-sm px-4 py-3 -rotate-1">
+                <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft">
+                  Returns Policy
+                </p>
+                <p className="font-serif-display italic text-sm text-ink mt-1">
+                  This copy may not be returned.
+                </p>
+              </div>
             </div>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 no-print">
