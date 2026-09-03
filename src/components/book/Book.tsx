@@ -323,6 +323,7 @@ const Interlude3 = () => (
 
 const Ch8 = () => (
   <Prose>
+    <div className="rain-spots absolute inset-0 -z-10" aria-hidden />
     <p>Anam.</p>
     <p>
       You have been the subject of this book since the dedication. I think
