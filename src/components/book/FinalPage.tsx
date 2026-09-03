@@ -149,7 +149,21 @@ export function FinalPage({
                 onClick={() => window.print()}
                 className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-ink-soft hover:text-ink transition"
               >
-                Print this copy
+                Save as PDF
+              </button>
+              <button
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(CLOSING_LINE);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 1800);
+                  } catch {
+                    /* clipboard unavailable */
+                  }
+                }}
+                className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-ink-soft hover:text-ink transition"
+              >
+                {copied ? "Copied ✓" : "Copy the closing line"}
               </button>
               <button
                 onClick={() => setStage("closing")}
