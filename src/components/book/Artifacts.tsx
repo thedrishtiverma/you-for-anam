@@ -8,17 +8,17 @@ import { motion } from "framer-motion";
  */
 export function ArtifactPage() {
   return (
-    <div className="relative h-full w-full overflow-hidden px-8 py-10 md:px-12">
-      <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
+    <div className="relative h-full w-full overflow-y-auto px-6 py-8 sm:px-8 sm:py-10 md:px-12">
+      <p className="font-mono-term text-[10px] tracking-[0.35em] sm:tracking-[0.4em] uppercase text-ink-soft">
         Loose items found between the pages
       </p>
 
-      {/* Tea ring */}
+      {/* Tea ring — decorative, safe at every width */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.1, delay: 0.1 }}
-        className="pointer-events-none absolute right-6 top-16 h-40 w-40 rounded-full md:right-12"
+        className="pointer-events-none absolute right-4 top-14 h-28 w-28 rounded-full sm:h-40 sm:w-40 sm:right-6 sm:top-16 md:right-12"
         style={{
           border: "6px solid oklch(0.62 0.06 65 / 0.28)",
           boxShadow:
@@ -27,96 +27,132 @@ export function ArtifactPage() {
         }}
       />
 
-      {/* Pressed flower */}
-      <motion.div
-        initial={{ opacity: 0, y: 14, rotate: -14 }}
-        animate={{ opacity: 1, y: 0, rotate: -9 }}
-        transition={{ duration: 0.9, delay: 0.25 }}
-        className="absolute left-8 top-24 md:left-14"
-      >
-        <PressedFlower />
-        <p className="mt-2 font-hand text-lg text-ink-soft">
-          kept, without meaning to
-        </p>
-      </motion.div>
-
-      {/* Bhutta receipt */}
-      <motion.div
-        initial={{ opacity: 0, y: 20, rotate: 5 }}
-        animate={{ opacity: 1, y: 0, rotate: 3 }}
-        transition={{ duration: 0.9, delay: 0.4 }}
-        className="absolute right-8 bottom-28 w-[190px] paper-grain-soft border border-ink/12 px-4 py-4 shadow-md md:right-16"
-        style={{ boxShadow: "0 12px 22px -14px oklch(0.2 0.02 60 / 0.5)" }}
-      >
-        <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft text-center">
-          Roadside · Monsoon
-        </p>
-        <div className="my-2 border-t border-dashed border-ink/25" />
-        <div className="space-y-1 font-mono-term text-[11px] text-ink">
-          <Row label="BHUTTA ×2" value="40" />
-          <Row label="NIMBU" value="00" />
-          <Row label="CHAI ×2" value="30" />
-        </div>
-        <div className="my-2 border-t border-dashed border-ink/25" />
-        <Row label="TOTAL" value="70" />
-        <p className="mt-3 text-center font-mono-term text-[9px] tracking-[0.25em] uppercase text-wax">
-          Unpaid · Pending
-        </p>
-      </motion.div>
-
-      {/* 2019 date stamp */}
-      <motion.div
-        initial={{ opacity: 0, scale: 1.15, rotate: -12 }}
-        animate={{ opacity: 1, scale: 1, rotate: -8 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-        className="absolute left-10 bottom-24 md:left-20"
-      >
-        <div className="rounded-sm border-2 border-wax/55 px-4 py-2 text-center">
-          <p className="font-mono-term text-[9px] tracking-[0.35em] uppercase text-wax/80">
-            First Filed
+      {/* Small screens: the same loose items, stacked so nothing collides */}
+      <div className="mt-10 flex flex-col items-center gap-8 md:hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 14, rotate: -14 }}
+          animate={{ opacity: 1, y: 0, rotate: -6 }}
+          transition={{ duration: 0.9, delay: 0.2 }}
+          className="self-start"
+        >
+          <PressedFlower />
+          <p className="mt-2 font-hand text-lg text-ink-soft">
+            kept, without meaning to
           </p>
-          <p className="font-mono-term text-xl tracking-[0.2em] text-wax/85">2019</p>
-          <p className="font-mono-term text-[9px] tracking-[0.25em] uppercase text-wax/70">
-            Class IX
+        </motion.div>
+        <TicketStub delay={0.35} />
+        <Receipt delay={0.5} className="w-full max-w-[220px] self-end" />
+        <DateStamp delay={0.65} className="self-start" />
+      </div>
+
+      {/* Medium and up: scattered across the page, as they fell */}
+      <div className="hidden md:block">
+        <motion.div
+          initial={{ opacity: 0, y: 14, rotate: -14 }}
+          animate={{ opacity: 1, y: 0, rotate: -9 }}
+          transition={{ duration: 0.9, delay: 0.25 }}
+          className="absolute left-14 top-24"
+        >
+          <PressedFlower />
+          <p className="mt-2 font-hand text-lg text-ink-soft">
+            kept, without meaning to
           </p>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Ticket stub */}
-      <motion.div
-        initial={{ opacity: 0, x: 24, rotate: 10 }}
-        animate={{ opacity: 1, x: 0, rotate: 7 }}
-        transition={{ duration: 0.9, delay: 0.75 }}
-        className="absolute right-1/2 top-1/2 translate-x-1/2 -translate-y-1/2"
-      >
-        <div className="flex items-stretch border border-ink/20 bg-paper-deep/40 shadow-sm">
-          <div className="px-4 py-3">
-            <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft">
-              Admit One
-            </p>
-            <p className="font-serif-display italic text-lg text-ink leading-tight">
-              Seven Years
-            </p>
-            <p className="font-mono-term text-[9px] tracking-[0.25em] uppercase text-ink-soft">
-              No expiry
-            </p>
-          </div>
-          <div className="border-l border-dashed border-ink/30 px-3 py-3 flex items-center">
-            <p className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-wax rotate-180 [writing-mode:vertical-rl]">
-              001
-            </p>
-          </div>
-        </div>
-      </motion.div>
+        <Receipt delay={0.4} className="absolute right-16 bottom-28 w-[190px]" />
+        <DateStamp delay={0.6} className="absolute left-20 bottom-24" />
 
-      {/* Ink thumbprint smudge */}
-      <div
-        className="pointer-events-none absolute bottom-10 right-1/3 h-10 w-8 rounded-[45%] opacity-25"
-        style={{ background: "oklch(0.22 0.01 60)", filter: "blur(2.5px)" }}
-      />
+        <div className="absolute right-1/2 top-1/2 translate-x-1/2 -translate-y-1/2">
+          <TicketStub delay={0.75} />
+        </div>
+
+        {/* Ink thumbprint smudge */}
+        <div
+          className="pointer-events-none absolute bottom-10 right-1/3 h-10 w-8 rounded-[45%] opacity-25"
+          style={{ background: "oklch(0.22 0.01 60)", filter: "blur(2.5px)" }}
+        />
+      </div>
     </div>
   );
 }
+
+function Receipt({ delay, className }: { delay: number; className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20, rotate: 5 }}
+      animate={{ opacity: 1, y: 0, rotate: 3 }}
+      transition={{ duration: 0.9, delay }}
+      className={`paper-grain-soft border border-ink/12 px-4 py-4 shadow-md ${className ?? ""}`}
+      style={{ boxShadow: "0 12px 22px -14px oklch(0.2 0.02 60 / 0.5)" }}
+    >
+      <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft text-center">
+        Roadside · Monsoon
+      </p>
+      <div className="my-2 border-t border-dashed border-ink/25" />
+      <div className="space-y-1 font-mono-term text-[11px] text-ink">
+        <Row label="BHUTTA ×2" value="40" />
+        <Row label="NIMBU" value="00" />
+        <Row label="CHAI ×2" value="30" />
+      </div>
+      <div className="my-2 border-t border-dashed border-ink/25" />
+      <Row label="TOTAL" value="70" />
+      <p className="mt-3 text-center font-mono-term text-[9px] tracking-[0.25em] uppercase text-wax">
+        Unpaid · Pending
+      </p>
+    </motion.div>
+  );
+}
+
+function DateStamp({ delay, className }: { delay: number; className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 1.15, rotate: -12 }}
+      animate={{ opacity: 1, scale: 1, rotate: -8 }}
+      transition={{ duration: 0.6, delay }}
+      className={className}
+    >
+      <div className="rounded-sm border-2 border-wax/55 px-4 py-2 text-center">
+        <p className="font-mono-term text-[9px] tracking-[0.35em] uppercase text-wax/80">
+          First Filed
+        </p>
+        <p className="font-mono-term text-xl tracking-[0.2em] text-wax/85">2019</p>
+        <p className="font-mono-term text-[9px] tracking-[0.25em] uppercase text-wax/70">
+          Class IX
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+function TicketStub({ delay }: { delay: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 24, rotate: 10 }}
+      animate={{ opacity: 1, x: 0, rotate: 7 }}
+      transition={{ duration: 0.9, delay }}
+    >
+      <div className="flex items-stretch border border-ink/20 bg-paper-deep/40 shadow-sm">
+        <div className="px-4 py-3">
+          <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft">
+            Admit One
+          </p>
+          <p className="font-serif-display italic text-lg text-ink leading-tight">
+            Seven Years
+          </p>
+          <p className="font-mono-term text-[9px] tracking-[0.25em] uppercase text-ink-soft">
+            No expiry
+          </p>
+        </div>
+        <div className="border-l border-dashed border-ink/30 px-3 py-3 flex items-center">
+          <p className="font-mono-term text-[10px] tracking-[0.3em] uppercase text-wax rotate-180 [writing-mode:vertical-rl]">
+            001
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
@@ -166,7 +202,7 @@ function PressedFlower() {
  */
 export function LibraryCardPage() {
   return (
-    <div className="relative h-full w-full overflow-y-auto px-8 py-10 md:px-12">
+    <div className="relative h-full w-full overflow-y-auto px-6 py-8 sm:px-8 sm:py-10 md:px-12">
       <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
         Filed at the back of the book
       </p>
@@ -176,7 +212,7 @@ export function LibraryCardPage() {
           initial={{ opacity: 0, y: 18, rotate: -3 }}
           animate={{ opacity: 1, y: 0, rotate: -1.5 }}
           transition={{ duration: 0.9 }}
-          className="w-[260px] paper-grain-soft border border-ink/20 px-5 py-5 shadow-md"
+          className="w-full max-w-[260px] paper-grain-soft border border-ink/20 px-5 py-5 shadow-md"
           style={{ boxShadow: "0 14px 26px -16px oklch(0.2 0.02 60 / 0.5)" }}
         >
           <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft text-center">
@@ -223,7 +259,7 @@ function FoldedChit() {
       transition={{ duration: 0.9, delay: 0.2 }}
       aria-expanded={open}
       aria-label={open ? "Fold the note back up" : "Unfold the folded note"}
-      className="w-[250px] text-left paper-grain-soft border border-ink/20 px-5 py-4 shadow-md"
+      className="w-full max-w-[250px] text-left paper-grain-soft border border-ink/20 px-5 py-4 shadow-md"
       style={{ boxShadow: "0 12px 22px -14px oklch(0.2 0.02 60 / 0.45)" }}
     >
       <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft">
