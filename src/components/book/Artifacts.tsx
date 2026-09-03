@@ -202,7 +202,7 @@ function PressedFlower() {
  */
 export function LibraryCardPage() {
   return (
-    <div className="relative h-full w-full overflow-y-auto px-8 py-10 md:px-12">
+    <div className="relative h-full w-full overflow-y-auto px-6 py-8 sm:px-8 sm:py-10 md:px-12">
       <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
         Filed at the back of the book
       </p>
@@ -212,7 +212,7 @@ export function LibraryCardPage() {
           initial={{ opacity: 0, y: 18, rotate: -3 }}
           animate={{ opacity: 1, y: 0, rotate: -1.5 }}
           transition={{ duration: 0.9 }}
-          className="w-[260px] paper-grain-soft border border-ink/20 px-5 py-5 shadow-md"
+          className="w-full max-w-[260px] paper-grain-soft border border-ink/20 px-5 py-5 shadow-md"
           style={{ boxShadow: "0 14px 26px -16px oklch(0.2 0.02 60 / 0.5)" }}
         >
           <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft text-center">
@@ -259,7 +259,7 @@ function FoldedChit() {
       transition={{ duration: 0.9, delay: 0.2 }}
       aria-expanded={open}
       aria-label={open ? "Fold the note back up" : "Unfold the folded note"}
-      className="w-[250px] text-left paper-grain-soft border border-ink/20 px-5 py-4 shadow-md"
+      className="w-full max-w-[250px] text-left paper-grain-soft border border-ink/20 px-5 py-4 shadow-md"
       style={{ boxShadow: "0 12px 22px -14px oklch(0.2 0.02 60 / 0.45)" }}
     >
       <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft">
