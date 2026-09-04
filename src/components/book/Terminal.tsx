@@ -36,7 +36,7 @@ export function Terminal({ onContinue }: { onContinue: () => void }) {
             <span>●</span><span>●</span><span>●</span>
             <span className="ml-3 opacity-70">tty/anam</span>
           </div>
-          <div className="p-6 md:p-8 text-sm md:text-base space-y-2 leading-relaxed min-h-[420px]">
+          <div className="p-6 md:p-8 text-sm md:text-base space-y-2 leading-relaxed min-h-[60vh] sm:min-h-[420px]">
             {lines.map((l, i) => (
               <p key={i}>{l}</p>
             ))}
@@ -99,8 +99,8 @@ function MetricBar({ label, value, delay, onDone }: { label: string; value: numb
   const blocks = Math.floor(p / 10);
   return (
     <div className="flex items-center gap-3">
-      <span className="w-40 inline-block">{label}</span>
-      <span className="tracking-[0.2em]">{"█".repeat(blocks)}{"░".repeat(10 - blocks)}</span>
+      <span className="w-28 sm:w-40 inline-block shrink-0">{label}</span>
+      <span className="tracking-[0.15em] text-xs sm:text-base">{"█".repeat(blocks)}{"░".repeat(10 - blocks)}</span>
     </div>
   );
 }

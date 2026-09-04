@@ -616,7 +616,7 @@ export function Book({
 
         <motion.div
           className="relative bg-paper rounded-sm book-shadow overflow-hidden touch-pan-y [perspective:1400px]"
-          style={{ height: "min(78vh, 780px)", minHeight: 440 }}
+          style={{ height: "min(78vh, 780px)", minHeight: 380 }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.15}
@@ -721,7 +721,7 @@ export function Book({
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 16 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 border border-ink/15 bg-paper/95 backdrop-blur-sm rounded-sm px-5 py-3 book-shadow"
+            className="fixed bottom-4 left-1/2 -translate-x-1/2 z-20 flex max-w-[calc(100vw-2rem)] flex-wrap items-center justify-center gap-x-4 gap-y-2 border border-ink/15 bg-paper/95 backdrop-blur-sm rounded-sm px-5 py-3 book-shadow"
           >
             <span className="font-serif-display italic text-sm text-ink-soft">
               You left a bookmark on page {resumeAt + 1}.
@@ -756,7 +756,7 @@ function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number
   if (page.kind === "toc") {
     const chapters = PAGES.filter((p) => p.kind === "chapter");
     return (
-      <div className="w-full h-full p-10 md:p-14 flex flex-col">
+      <div className="w-full h-full p-6 sm:p-10 md:p-14 flex flex-col">
         <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft mb-2">
           Contents
         </p>
@@ -781,7 +781,7 @@ function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number
 
   if (page.kind === "front") {
     return (
-      <div className="w-full h-full p-10 md:p-14 flex flex-col">
+      <div className="w-full h-full p-6 sm:p-10 md:p-14 flex flex-col">
         <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
           {page.title}
         </p>
@@ -795,7 +795,7 @@ function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number
     return (
       <div className="w-full h-full flex flex-col">
         <div className="flex-1">{page.body}</div>
-        <div className="p-10 md:p-14 pt-0">
+        <div className="p-6 sm:p-10 md:p-14 pt-0">
           <Footer pageNumber={pageNumber} total={total} />
         </div>
       </div>
@@ -806,7 +806,7 @@ function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number
     return (
       <div className="w-full h-full flex flex-col">
         <div className="flex-1">{End()}</div>
-        <div className="p-10 md:p-14 pt-0">
+        <div className="p-6 sm:p-10 md:p-14 pt-0">
           <Footer pageNumber={pageNumber} total={total} />
         </div>
       </div>
@@ -815,7 +815,7 @@ function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number
 
   // chapter
   return (
-    <div className="w-full h-full p-10 md:p-14 flex flex-col">
+    <div className="w-full h-full p-6 sm:p-10 md:p-14 flex flex-col">
       <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
         {page.part}
       </p>
