@@ -19,7 +19,7 @@ export function ArtifactPage() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.1, delay: 0.1 }}
         aria-hidden="true"
-        className="pointer-events-none absolute right-4 top-16 -z-0 h-24 w-24 rounded-full sm:h-36 sm:w-36 sm:right-8 md:right-14"
+        className="pointer-events-none absolute hidden md:block md:bottom-14 md:right-20 md:h-36 md:w-36 rounded-full"
         style={{
           border: "6px solid oklch(0.62 0.06 65 / 0.22)",
           boxShadow:
