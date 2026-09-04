@@ -794,7 +794,7 @@ function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number
   if (page.kind === "interlude") {
     return (
       <div className="w-full h-full flex flex-col">
-        <div className="flex-1">{page.body}</div>
+        <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">{page.body}</div>
         <div className="p-6 sm:p-10 md:p-14 pt-0">
           <Footer pageNumber={pageNumber} total={total} />
         </div>
