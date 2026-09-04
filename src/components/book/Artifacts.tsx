@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
  */
 export function ArtifactPage() {
   return (
-    <div className="relative h-full w-full overflow-y-auto px-6 py-8 sm:px-8 sm:py-10 md:px-12">
+    <div className="relative min-h-full w-full px-6 py-8 sm:px-8 sm:py-10 md:px-12">
       <p className="font-mono-term text-[10px] tracking-[0.35em] sm:tracking-[0.4em] uppercase text-ink-soft">
         Loose items found between the pages
       </p>
@@ -187,7 +187,7 @@ function PressedFlower() {
  */
 export function LibraryCardPage() {
   return (
-    <div className="relative h-full w-full overflow-y-auto px-6 py-8 sm:px-8 sm:py-10 md:px-12">
+    <div className="relative min-h-full w-full px-6 py-8 sm:px-8 sm:py-10 md:px-12">
       <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft">
         Filed at the back of the book
       </p>
