@@ -42,7 +42,7 @@ export function Intro({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -70, opacity: 0 }}
             transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-            className="absolute right-6 top-0 z-30 w-[210px] no-print"
+            className="absolute right-3 sm:right-6 top-0 z-30 w-[170px] sm:w-[210px] no-print"
           >
             <div
               className="px-4 pt-4 pb-7 text-paper shadow-md"

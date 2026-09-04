@@ -33,7 +33,7 @@ export function ChapterNine({
       <div className="w-full max-w-3xl">
         <div
           className="relative bg-paper rounded-sm book-shadow overflow-hidden"
-          style={{ aspectRatio: "3 / 4", minHeight: 560 }}
+          style={{ height: "min(80vh, 760px)", minHeight: 420 }}
         >
           <AnimatePresence mode="wait">
             {stage === "appendix" && (
@@ -209,7 +209,7 @@ function PageFrame({
       animate={{ opacity: 1, x: 0, rotateY: 0 }}
       exit={{ opacity: 0, x: -30, rotateY: -12 }}
       transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-      className={`absolute inset-0 p-10 md:p-14 flex flex-col ${
+      className={`absolute inset-0 overflow-y-auto p-6 sm:p-10 md:p-14 flex flex-col ${
         centered ? "items-center justify-center" : ""
       }`}
       style={{ transformStyle: "preserve-3d" }}

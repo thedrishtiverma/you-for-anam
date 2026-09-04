@@ -71,7 +71,7 @@ export function FinalPage({
               style={{ boxShadow: "0 4px 8px -2px oklch(0.2 0.05 25 / 0.4)" }}
             />
 
-            <div className="paper-grain-soft border border-ink/15 rounded-sm p-10 md:p-14 shadow-md">
+            <div className="paper-grain-soft border border-ink/15 rounded-sm p-6 sm:p-10 md:p-14 shadow-md">
               <p className="font-hand text-3xl text-ink leading-relaxed">Anam —</p>
               <div className="mt-6 font-hand text-[1.6rem] md:text-[1.75rem] text-ink/90 leading-[1.55] space-y-4">
                 <p>Thank you.</p>
@@ -181,7 +181,7 @@ export function FinalPage({
             initial={{ scale: 1, opacity: 1, rotateY: 0 }}
             animate={{ scale: 0.85, opacity: 1, rotateY: -90 }}
             transition={{ duration: 1.6, ease: [0.32, 0.72, 0, 1] }}
-            className="w-[300px] h-[420px] bg-paper border border-ink/20 rounded-sm origin-left book-shadow"
+            className="w-[min(75vw,300px)] h-[min(60vh,420px)] bg-paper border border-ink/20 rounded-sm origin-left book-shadow"
             style={{ transformStyle: "preserve-3d" }}
           />
         )}
@@ -195,7 +195,7 @@ export function FinalPage({
             className="text-center"
           >
             <div
-              className="relative w-[300px] h-[420px] md:w-[340px] md:h-[480px] rounded-r-md book-shadow mx-auto"
+              className="relative w-[min(75vw,300px)] h-[min(62vh,420px)] md:w-[340px] md:h-[480px] rounded-r-md book-shadow mx-auto"
               style={{
                 background:
                   "linear-gradient(135deg, oklch(0.32 0.04 60) 0%, oklch(0.22 0.03 60) 60%, oklch(0.18 0.025 60) 100%)",

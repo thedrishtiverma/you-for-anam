@@ -60,7 +60,7 @@ function BookCover({ onClick }: { onClick: () => void }) {
       aria-label="Open the book"
     >
       <div
-        className="relative w-[280px] h-[400px] md:w-[340px] md:h-[480px] rounded-r-md book-shadow transition-transform duration-700 group-hover:-rotate-1 group-hover:-translate-y-2"
+        className="relative w-[min(78vw,280px)] h-[min(60vh,400px)] md:w-[340px] md:h-[480px] rounded-r-md book-shadow transition-transform duration-700 group-hover:-rotate-1 group-hover:-translate-y-2"
         style={{
           background:
             "linear-gradient(135deg, oklch(0.32 0.04 60) 0%, oklch(0.22 0.03 60) 60%, oklch(0.18 0.025 60) 100%)",
