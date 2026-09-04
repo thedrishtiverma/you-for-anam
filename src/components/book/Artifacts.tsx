@@ -13,45 +13,28 @@ export function ArtifactPage() {
         Loose items found between the pages
       </p>
 
-      {/* Tea ring — decorative, safe at every width */}
+      {/* Tea ring — a faint stain behind everything, never in the way */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.1, delay: 0.1 }}
-        className="pointer-events-none absolute right-4 top-14 h-28 w-28 rounded-full sm:h-40 sm:w-40 sm:right-6 sm:top-16 md:right-12"
+        aria-hidden="true"
+        className="pointer-events-none absolute hidden md:block md:bottom-14 md:right-20 md:h-36 md:w-36 rounded-full"
         style={{
-          border: "6px solid oklch(0.62 0.06 65 / 0.28)",
+          border: "6px solid oklch(0.62 0.06 65 / 0.22)",
           boxShadow:
-            "inset 0 0 18px oklch(0.62 0.06 65 / 0.16), 0 0 22px oklch(0.62 0.06 65 / 0.10)",
+            "inset 0 0 18px oklch(0.62 0.06 65 / 0.14), 0 0 22px oklch(0.62 0.06 65 / 0.08)",
           filter: "blur(0.3px)",
         }}
       />
 
-      {/* Small screens: the same loose items, stacked so nothing collides */}
-      <div className="mt-10 flex flex-col items-center gap-8 md:hidden">
+      {/* One flow layout at every width: a grid, so items can never collide */}
+      <div className="relative z-10 mt-8 grid grid-cols-1 items-start justify-items-center gap-8 sm:grid-cols-2 sm:gap-10 md:mt-12 md:gap-14">
         <motion.div
           initial={{ opacity: 0, y: 14, rotate: -14 }}
           animate={{ opacity: 1, y: 0, rotate: -6 }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="self-start"
-        >
-          <PressedFlower />
-          <p className="mt-2 font-hand text-lg text-ink-soft">
-            kept, without meaning to
-          </p>
-        </motion.div>
-        <TicketStub delay={0.35} />
-        <Receipt delay={0.5} className="w-full max-w-[220px] self-end" />
-        <DateStamp delay={0.65} className="self-start" />
-      </div>
-
-      {/* Medium and up: scattered across the page, as they fell */}
-      <div className="hidden md:block">
-        <motion.div
-          initial={{ opacity: 0, y: 14, rotate: -14 }}
-          animate={{ opacity: 1, y: 0, rotate: -9 }}
-          transition={{ duration: 0.9, delay: 0.25 }}
-          className="absolute left-14 top-24"
+          className="justify-self-start"
         >
           <PressedFlower />
           <p className="mt-2 font-hand text-lg text-ink-soft">
@@ -59,22 +42,24 @@ export function ArtifactPage() {
           </p>
         </motion.div>
 
-        <Receipt delay={0.4} className="absolute right-16 bottom-28 w-[190px]" />
-        <DateStamp delay={0.6} className="absolute left-20 bottom-24" />
-
-        <div className="absolute right-1/2 top-1/2 translate-x-1/2 -translate-y-1/2">
-          <TicketStub delay={0.75} />
+        <div className="w-full max-w-[240px] justify-self-center sm:justify-self-end">
+          <TicketStub delay={0.35} />
         </div>
 
-        {/* Ink thumbprint smudge */}
-        <div
-          className="pointer-events-none absolute bottom-10 right-1/3 h-10 w-8 rounded-[45%] opacity-25"
-          style={{ background: "oklch(0.22 0.01 60)", filter: "blur(2.5px)" }}
+        <Receipt
+          delay={0.5}
+          className="w-full max-w-[220px] justify-self-center sm:justify-self-start"
+        />
+
+        <DateStamp
+          delay={0.65}
+          className="justify-self-center sm:justify-self-end"
         />
       </div>
     </div>
   );
 }
+
 
 function Receipt({ delay, className }: { delay: number; className?: string }) {
   return (
