@@ -480,6 +480,7 @@ export function Book({
     if (target === index) return;
     setDirection(target > index ? 1 : -1);
     setIndex(target);
+    playPageTurn();
     if (BUG_AT[target] !== undefined) setBug(BUG_AT[target]);
   };
 
