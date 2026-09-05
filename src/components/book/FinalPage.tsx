@@ -210,7 +210,7 @@ export function FinalPage({
                 <h2 className="font-serif-display text-7xl gold-foil leading-none">YOU</h2>
                 <div className="w-16 h-px bg-gold/60" />
                 <p className="font-serif-display italic text-gold/90 text-sm">Checked Out</p>
-                <p className="absolute bottom-8 font-serif-display italic text-gold/70 text-xs">
+                <p className="absolute bottom-12 font-serif-display italic text-gold/85 text-sm">
                   by Anam
                 </p>
               </div>
