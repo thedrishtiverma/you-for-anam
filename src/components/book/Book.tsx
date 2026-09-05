@@ -460,10 +460,16 @@ export function Book({
   // A part title card announces each new Part, once, for a beat.
   useEffect(() => {
     const part = PAGES[index]?.part;
-    if (!part || !part.includes("—")) return;
+    if (!part || !part.includes("—")) {
+      setPartCard(null);
+      return;
+    }
     setPartCard(part);
     const id = setTimeout(() => setPartCard(null), 1400);
-    return () => clearTimeout(id);
+    return () => {
+      clearTimeout(id);
+      setPartCard(null);
+    };
   }, [index]);
 
   const page = PAGES[index];
