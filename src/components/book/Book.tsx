@@ -5,6 +5,8 @@ import { MarginNote } from "./MarginNote";
 import { StagedLines } from "./StagedLines";
 import { ArtifactPage, LibraryCardPage } from "./Artifacts";
 import { PencilNote } from "./PencilNote";
+import { SoundToggle } from "./SoundToggle";
+import { playPageTurn } from "@/lib/sound";
 
 
 type Page = {
@@ -478,6 +480,7 @@ export function Book({
     if (target === index) return;
     setDirection(target > index ? 1 : -1);
     setIndex(target);
+    playPageTurn();
     if (BUG_AT[target] !== undefined) setBug(BUG_AT[target]);
   };
 
@@ -490,6 +493,7 @@ export function Book({
 
     const nextIndex = index + 1;
     setIndex(nextIndex);
+    playPageTurn();
     if (BUG_AT[nextIndex] !== undefined) setBug(BUG_AT[nextIndex]);
   };
 
@@ -498,6 +502,7 @@ export function Book({
 
     setDirection(-1);
     setIndex((i) => i - 1);
+    playPageTurn();
   };
 
   // Keyboard navigation — the page footer promises arrows, so honour them.
@@ -552,6 +557,7 @@ export function Book({
           <span className="font-serif-display italic text-xs text-ink-soft">
             {page.chapter ?? page.title ?? "—"}
           </span>
+          <SoundToggle />
         </div>
 
         <AnimatePresence initial={false}>
