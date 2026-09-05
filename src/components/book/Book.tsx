@@ -557,6 +557,7 @@ export function Book({
           <span className="font-serif-display italic text-xs text-ink-soft">
             {page.chapter ?? page.title ?? "—"}
           </span>
+          <SoundToggle />
         </div>
 
         <AnimatePresence initial={false}>
