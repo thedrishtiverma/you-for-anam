@@ -493,6 +493,7 @@ export function Book({
 
     const nextIndex = index + 1;
     setIndex(nextIndex);
+    playPageTurn();
     if (BUG_AT[nextIndex] !== undefined) setBug(BUG_AT[nextIndex]);
   };
 
@@ -501,6 +502,7 @@ export function Book({
 
     setDirection(-1);
     setIndex((i) => i - 1);
+    playPageTurn();
   };
 
   // Keyboard navigation — the page footer promises arrows, so honour them.
