@@ -85,6 +85,15 @@ export function Intro({
           A note before the book
         </motion.p>
 
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.3 }}
+          className="-mt-7 mb-10"
+        >
+          <BirthdayLine />
+        </motion.div>
+
         <h1 className="font-serif-display text-3xl md:text-4xl ink-text leading-snug mb-10">
           {LINES[0]}
         </h1>
