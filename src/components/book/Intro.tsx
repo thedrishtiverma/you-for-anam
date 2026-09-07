@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { HiddenSeal, BirthdayLine } from "./HiddenSeal";
 
 const LINES = [
   "A Very Very Very Happy Birthday, Anam 🥳❤️🫂🧿",
@@ -33,6 +34,7 @@ export function Intro({
   return (
     <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-6 py-16 relative overflow-hidden">
       <DustField />
+      <HiddenSeal />
 
       {/* Wax bookmark — she stopped somewhere; offer the way back */}
       <AnimatePresence>
@@ -82,6 +84,15 @@ export function Intro({
         >
           A note before the book
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.3 }}
+          className="-mt-7 mb-10"
+        >
+          <BirthdayLine />
+        </motion.div>
 
         <h1 className="font-serif-display text-3xl md:text-4xl ink-text leading-snug mb-10">
           {LINES[0]}
