@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { HiddenSeal, BirthdayLine } from "./HiddenSeal";
 
 const LINES = [
   "A Very Very Very Happy Birthday, Anam 🥳❤️🫂🧿",
