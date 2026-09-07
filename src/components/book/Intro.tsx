@@ -34,6 +34,7 @@ export function Intro({
   return (
     <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-6 py-16 relative overflow-hidden">
       <DustField />
+      <HiddenSeal />
 
       {/* Wax bookmark — she stopped somewhere; offer the way back */}
       <AnimatePresence>
