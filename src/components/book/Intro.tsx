@@ -94,18 +94,20 @@ export function Intro({
           <BirthdayLine />
         </motion.div>
 
-        <h1 className="font-serif-display text-3xl md:text-4xl ink-text leading-snug mb-10">
+        <h1 className="font-serif-display text-2xl sm:text-3xl md:text-4xl ink-text leading-snug mb-6 sm:mb-10 text-balance">
           {LINES[0]}
         </h1>
 
-        <div className="space-y-4">
+        <div className="mx-auto mb-8 sm:mb-10 h-px w-16 bg-ink/20" />
+
+        <div className="space-y-3 sm:space-y-4">
           {LINES.slice(1).map((l, i) => (
             <motion.p
               key={i}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.8 + i * 0.5 }}
-              className="font-serif-display italic text-lg md:text-xl text-ink/85"
+              transition={{ duration: 0.6, delay: 0.6 + i * 0.32 }}
+              className="font-serif-display italic text-base sm:text-lg md:text-xl text-ink/85 text-balance"
             >
               {l}
             </motion.p>
@@ -115,8 +117,8 @@ export function Intro({
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.8 + LINES.length * 0.5 }}
-          className="mt-12 font-hand text-2xl md:text-3xl text-ink"
+          transition={{ duration: 0.8, delay: 0.6 + LINES.length * 0.32 }}
+          className="mt-10 sm:mt-12 font-hand text-2xl md:text-3xl text-ink"
         >
           ...Anam-ish enough for you? ♡
         </motion.p>
@@ -124,15 +126,15 @@ export function Intro({
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.6 + LINES.length * 0.5 }}
-          className="mt-14 flex justify-center"
+          transition={{ duration: 0.9, delay: 1.1 + LINES.length * 0.32 }}
+          className="mt-12 sm:mt-14 flex justify-center"
         >
           <button
             onClick={onOpen}
             aria-label="Open the first edition book and start reading"
             className="group inline-flex flex-col items-center gap-3 focus:outline-none"
           >
-            <span className="font-mono-term font-bold tracking-[0.35em] text-sm md:text-base uppercase ink-text border border-ink/60 px-6 py-3 rounded-sm group-hover:bg-ink group-hover:text-paper transition">
+            <span className="font-mono-term font-bold tracking-[0.25em] sm:tracking-[0.35em] text-xs sm:text-sm md:text-base uppercase ink-text border border-ink/60 px-5 sm:px-7 py-3 sm:py-3.5 rounded-sm shadow-[0_10px_24px_-18px_oklch(0.2_0.02_60/0.9)] group-hover:bg-ink group-hover:text-paper group-hover:shadow-[0_14px_30px_-16px_oklch(0.2_0.02_60/0.9)] group-active:scale-[0.98] transition-all duration-300">
               OPEN YOUR FIRST EDITION
             </span>
             <span className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft group-hover:text-ink transition">
