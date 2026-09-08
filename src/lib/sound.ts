@@ -2,10 +2,8 @@
 // plus an optional ambient loop. Both are off until the reader turns sound on.
 
 const PREF_KEY = "you-first-edition:sound";
-const MUSIC_SRC = "/audio/ambience.mp3";
 
 let ctx: AudioContext | null = null;
-let music: HTMLAudioElement | null = null;
 let lastRustle = 0;
 
 export function soundEnabled(): boolean {
@@ -72,37 +70,42 @@ export function playPageTurn() {
   src.stop(ac.currentTime + dur);
 }
 
-/** Ambient loop. Silently does nothing until an audio file exists at MUSIC_SRC. */
+/** Ambient music: streams the song from YouTube in a hidden, looping player. */
+const MUSIC_VIDEO_ID = "BTRPBiE_1lA";
+let frame: HTMLIFrameElement | null = null;
+
 export function startMusic() {
-  if (typeof window === "undefined") return;
-  if (!music) {
-    music = new Audio(MUSIC_SRC);
-    music.loop = true;
-    music.volume = 0;
-    music.addEventListener("error", () => {
-      music = null;
-    });
-  }
-  void music.play().then(
-    () => fade(music!, 0.18),
-    () => {
-      /* blocked or missing file — stay silent */
-    },
-  );
+  if (typeof window === "undefined" || frame) return;
+  frame = document.createElement("iframe");
+  frame.title = "Background music";
+  frame.allow = "autoplay";
+  frame.setAttribute("aria-hidden", "true");
+  frame.src =
+    `https://www.youtube-nocookie.com/embed/${MUSIC_VIDEO_ID}` +
+    `?autoplay=1&loop=1&playlist=${MUSIC_VIDEO_ID}&controls=0&modestbranding=1&playsinline=1&enablejsapi=1`;
+  Object.assign(frame.style, {
+    position: "fixed",
+    width: "1px",
+    height: "1px",
+    left: "-9999px",
+    bottom: "0",
+    border: "0",
+    opacity: "0",
+    pointerEvents: "none",
+  } satisfies Partial<CSSStyleDeclaration>);
+  document.body.appendChild(frame);
+
+  // Soften the volume once the player is ready.
+  window.setTimeout(() => {
+    frame?.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func: "setVolume", args: [22] }),
+      "*",
+    );
+  }, 1500);
 }
 
 export function stopMusic() {
-  if (music) fade(music, 0, () => music?.pause());
+  frame?.remove();
+  frame = null;
 }
 
-function fade(el: HTMLAudioElement, to: number, done?: () => void) {
-  const from = el.volume;
-  const start = performance.now();
-  const step = (t: number) => {
-    const k = Math.min(1, (t - start) / 900);
-    el.volume = from + (to - from) * k;
-    if (k < 1) requestAnimationFrame(step);
-    else done?.();
-  };
-  requestAnimationFrame(step);
-}
