@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiddenSeal, BirthdayLine } from "./HiddenSeal";
+import { SoundToggle } from "./SoundToggle";
+import { soundEnabled, setSoundEnabled } from "@/lib/sound";
 
 const LINES = [
   "A Very Very Very Happy Birthday, Anam 🥳❤️🫂🧿",
