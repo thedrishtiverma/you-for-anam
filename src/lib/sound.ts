@@ -2,10 +2,8 @@
 // plus an optional ambient loop. Both are off until the reader turns sound on.
 
 const PREF_KEY = "you-first-edition:sound";
-const MUSIC_SRC = "/audio/ambience.mp3";
 
 let ctx: AudioContext | null = null;
-let music: HTMLAudioElement | null = null;
 let lastRustle = 0;
 
 export function soundEnabled(): boolean {
