@@ -32,7 +32,7 @@ export function Intro({
   }, []);
 
   return (
-    <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-6 py-16 relative overflow-hidden">
+    <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-6 pt-6 pb-16 relative overflow-hidden">
       <DustField />
       <HiddenSeal />
 
@@ -44,8 +44,9 @@ export function Intro({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -70, opacity: 0 }}
             transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-            className="absolute right-3 sm:right-6 top-0 z-30 w-[170px] sm:w-[210px] no-print"
+            className="relative z-30 mb-6 w-[170px] sm:w-[210px] self-end sm:absolute sm:right-6 sm:top-0 sm:mb-0 no-print"
           >
+
             <div
               className="px-4 pt-4 pb-7 text-paper shadow-md"
               style={{
