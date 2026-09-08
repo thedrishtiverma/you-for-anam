@@ -130,10 +130,13 @@ export function Intro({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.1 + LINES.length * 0.32 }}
-          className="mt-12 sm:mt-14 flex justify-center"
+          className="mt-12 sm:mt-14 flex flex-col items-center gap-5"
         >
           <button
-            onClick={onOpen}
+            onClick={() => {
+              if (!soundEnabled()) setSoundEnabled(true);
+              onOpen();
+            }}
             aria-label="Open the first edition book and start reading"
             className="group inline-flex flex-col items-center gap-3 focus:outline-none"
           >
@@ -144,6 +147,7 @@ export function Intro({
               ⸻ DRISHTI ⸻
             </span>
           </button>
+          <SoundToggle />
         </motion.div>
       </div>
     </div>
