@@ -886,10 +886,10 @@ export function Signature({ children }: { children: ReactNode }) {
 }
 
 
-function Footer({ pageNumber, total }: { pageNumber: number; total: number }) {
+function Footer({ pageNumber, total, edition }: { pageNumber: number; total: number; edition: string }) {
   return (
     <div className="mt-6 pt-3 border-t border-ink/10 flex items-center justify-between font-serif-display italic text-xs text-ink-soft">
-      <span>YOU — First Edition</span>
+      <span>{edition}</span>
       <span>· {pageNumber} / {total} ·</span>
     </div>
   );
