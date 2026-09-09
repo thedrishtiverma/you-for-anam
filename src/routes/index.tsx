@@ -7,6 +7,7 @@ import { PrintingPress } from "@/components/book/PrintingPress";
 import { Book } from "@/components/book/Book";
 import { ChapterNine } from "@/components/book/ChapterNine";
 import { FinalPage } from "@/components/book/FinalPage";
+import { SECOND_EDITION_PAGES } from "@/components/book/SecondEdition";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,7 +46,14 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Stage = "intro" | "error" | "press" | "book" | "chapter9" | "final";
+type Stage =
+  | "intro"
+  | "error"
+  | "press"
+  | "book"
+  | "chapter9"
+  | "final"
+  | "book2";
 
 function Index() {
   const [stage, setStage] = useState<Stage>("intro");
@@ -88,7 +96,20 @@ function Index() {
             />
           )}
           {stage === "final" && (
-            <FinalPage answer={answer} onReset={() => setStage("intro")} />
+            <FinalPage
+              answer={answer}
+              onReset={() => setStage("intro")}
+              onSecondEdition={() => setStage("book2")}
+            />
+          )}
+          {stage === "book2" && (
+            <Book
+              pages={SECOND_EDITION_PAGES}
+              storageKey="you-second-edition:page"
+              edition="YOU — Second Edition"
+              bugAt={{}}
+              onFinish={() => setStage("intro")}
+            />
           )}
         </motion.div>
       </AnimatePresence>
