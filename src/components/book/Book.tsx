@@ -809,7 +809,7 @@ function PageInner({
             </li>
           ))}
         </ul>
-        <Footer pageNumber={pageNumber} total={total} />
+        <Footer pageNumber={pageNumber} total={total} edition={edition} />
       </div>
     );
   }
@@ -821,7 +821,7 @@ function PageInner({
           {page.title}
         </p>
         <div className="flex-1 mt-8 overflow-y-auto pr-2">{page.body}</div>
-        <Footer pageNumber={pageNumber} total={total} />
+        <Footer pageNumber={pageNumber} total={total} edition={edition} />
       </div>
     );
   }
@@ -831,7 +831,7 @@ function PageInner({
       <div className="w-full h-full flex flex-col">
         <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">{page.body}</div>
         <div className="p-6 sm:p-10 md:p-14 pt-0">
-          <Footer pageNumber={pageNumber} total={total} />
+          <Footer pageNumber={pageNumber} total={total} edition={edition} />
         </div>
       </div>
     );
@@ -840,9 +840,9 @@ function PageInner({
   if (page.kind === "end") {
     return (
       <div className="w-full h-full flex flex-col">
-        <div className="flex-1">{End()}</div>
+        <div className="flex-1">{page.body ?? End()}</div>
         <div className="p-6 sm:p-10 md:p-14 pt-0">
-          <Footer pageNumber={pageNumber} total={total} />
+          <Footer pageNumber={pageNumber} total={total} edition={edition} />
         </div>
       </div>
     );
@@ -861,12 +861,12 @@ function PageInner({
         {page.title}
       </h2>
       <div className="flex-1 overflow-y-auto pr-2">{page.body}</div>
-      <Footer pageNumber={pageNumber} total={total} />
+      <Footer pageNumber={pageNumber} total={total} edition={edition} />
     </div>
   );
 }
 
-function Prose({ children }: { children: ReactNode }) {
+export function Prose({ children }: { children: ReactNode }) {
   return (
     <div className="relative font-serif-body text-ink text-[1.02rem] md:text-[1.08rem] leading-[1.8] space-y-4 max-w-prose">
       {children}
@@ -874,7 +874,7 @@ function Prose({ children }: { children: ReactNode }) {
   );
 }
 
-function Signature({ children }: { children: ReactNode }) {
+export function Signature({ children }: { children: ReactNode }) {
   return (
     <p className="pt-6 mt-2 border-t border-ink/10 font-serif-display italic text-base text-ink">
       <span className="font-mono-term not-italic tracking-[0.3em] text-[10px] uppercase text-wax mr-2">
