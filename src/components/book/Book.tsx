@@ -10,7 +10,7 @@ import { SoundToggle } from "./SoundToggle";
 import { playPageTurn } from "@/lib/sound";
 
 
-type Page = {
+export type Page = {
   kind: "front" | "toc" | "chapter" | "interlude" | "end";
   part?: string;
   chapter?: string;
@@ -412,19 +412,27 @@ const BUG_AT: Record<number, number> = { 4: 0, 8: 1, 12: 2, 14: 3 };
 const STORAGE_KEY = "you-first-edition:page";
 
 // Rough minutes of reading left, by page weight.
-function minutesLeft(from: number) {
+function minutesLeft(pages: Page[], from: number) {
   const weight = (p: Page) =>
     p.kind === "chapter" ? 1.2 : p.kind === "front" ? 0.8 : 0.3;
-  const total = PAGES.slice(from).reduce((sum, p) => sum + weight(p), 0);
+  const total = pages.slice(from).reduce((sum, p) => sum + weight(p), 0);
   return Math.max(1, Math.round(total));
 }
 
 export function Book({
   onFinish,
   initialPage = 0,
+  pages = PAGES,
+  storageKey = STORAGE_KEY,
+  edition = "YOU — First Edition",
+  bugAt = BUG_AT,
 }: {
   onFinish: () => void;
   initialPage?: number;
+  pages?: Page[];
+  storageKey?: string;
+  edition?: string;
+  bugAt?: Record<number, number>;
 }) {
   const [index, setIndex] = useState(initialPage);
   const [furthest, setFurthest] = useState(initialPage);
@@ -434,6 +442,7 @@ export function Book({
   const [resumeAt, setResumeAt] = useState<number | null>(null);
   const [railOpen, setRailOpen] = useState(false);
   const reduced = useReducedMotion();
+  const BUG_MAP = bugAt;
 
   // Page curl follows the drag: paper bends before it turns.
   const dragX = useMotionValue(0);
@@ -445,25 +454,25 @@ export function Book({
   // Resume: offer to return to the furthest page read, never jump silently.
   useEffect(() => {
     try {
-      const saved = Number(localStorage.getItem(STORAGE_KEY));
-      if (Number.isFinite(saved) && saved > 0 && saved < PAGES.length) setResumeAt(saved);
+      const saved = Number(localStorage.getItem(storageKey));
+      if (Number.isFinite(saved) && saved > 0 && saved < pages.length) setResumeAt(saved);
     } catch {
       /* storage unavailable */
     }
-  }, []);
+  }, [storageKey, pages.length]);
 
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, String(index));
+      localStorage.setItem(storageKey, String(index));
     } catch {
       /* storage unavailable */
     }
     setFurthest((f) => Math.max(f, index));
-  }, [index]);
+  }, [index, storageKey]);
 
   // A part title card announces each new Part, once, for a beat.
   useEffect(() => {
-    const part = PAGES[index]?.part;
+    const part = pages[index]?.part;
     if (!part || !part.includes("—")) {
       setPartCard(null);
       return;
@@ -474,20 +483,20 @@ export function Book({
       clearTimeout(id);
       setPartCard(null);
     };
-  }, [index]);
+  }, [index, pages]);
 
-  const page = PAGES[index];
+  const page = pages[index];
 
   const goTo = (target: number) => {
     if (target === index) return;
     setDirection(target > index ? 1 : -1);
     setIndex(target);
     playPageTurn();
-    if (BUG_AT[target] !== undefined) setBug(BUG_AT[target]);
+    if (BUG_MAP[target] !== undefined) setBug(BUG_MAP[target]);
   };
 
   const next = () => {
-    if (index >= PAGES.length - 1) {
+    if (index >= pages.length - 1) {
       onFinish();
       return;
     }
@@ -496,7 +505,7 @@ export function Book({
     const nextIndex = index + 1;
     setIndex(nextIndex);
     playPageTurn();
-    if (BUG_AT[nextIndex] !== undefined) setBug(BUG_AT[nextIndex]);
+    if (BUG_MAP[nextIndex] !== undefined) setBug(BUG_MAP[nextIndex]);
   };
 
   const prev = () => {
@@ -535,13 +544,13 @@ export function Book({
 
   return (
     <div className="paper-grain min-h-screen flex flex-col items-center justify-center px-4 py-12 relative">
-      <h1 className="sr-only">YOU — A First Edition: the book</h1>
+      <h1 className="sr-only">{edition}: the book</h1>
 
       {/* Reading ribbon */}
       <div className="fixed left-0 right-0 top-0 h-[3px] bg-ink/10 z-20">
         <motion.div
           className="h-full bg-wax/70"
-          animate={{ width: `${((index + 1) / PAGES.length) * 100}%` }}
+          animate={{ width: `${((index + 1) / pages.length) * 100}%` }}
           transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
         />
       </div>
@@ -570,7 +579,7 @@ export function Book({
               exit={{ opacity: 0, height: 0 }}
               className="mb-4 overflow-hidden border-y border-ink/10 divide-y divide-ink/5"
             >
-              {PAGES.map((p, i) => {
+              {pages.map((p, i) => {
                 const label =
                   p.chapter ??
                   (p.kind === "front"
@@ -652,7 +661,7 @@ export function Book({
               className="absolute inset-0 origin-left"
               style={{ transformStyle: "preserve-3d", rotateY: reduced ? 0 : curl }}
             >
-              <PageInner page={page} pageNumber={index + 1} total={PAGES.length} />
+              <PageInner page={page} pageNumber={index + 1} total={pages.length} pages={pages} edition={edition} />
             </motion.div>
           </AnimatePresence>
 
@@ -714,16 +723,16 @@ export function Book({
             ← Previous
           </button>
           <span className="font-serif-display italic text-ink-soft text-sm">
-            page {index + 1} of {PAGES.length}
-            <span className="ml-2 text-ink-soft/60">· ≈ {minutesLeft(index)} min left</span>
+            page {index + 1} of {pages.length}
+            <span className="ml-2 text-ink-soft/60">· ≈ {minutesLeft(pages, index)} min left</span>
             <span className="hidden md:inline ml-2 text-ink-soft/60">· swipe or use arrows</span>
           </span>
           <button
             onClick={next}
-            aria-label={index >= PAGES.length - 1 ? "Continue to next section" : "Go to next page"}
+            aria-label={index >= pages.length - 1 ? "Continue to next section" : "Go to next page"}
             className="font-mono-term text-xs tracking-[0.3em] uppercase text-ink-soft hover:text-ink transition"
           >
-            {index >= PAGES.length - 1 ? "Continue →" : "Next →"}
+            {index >= pages.length - 1 ? "Continue →" : "Next →"}
           </button>
         </div>
       </div>
@@ -766,9 +775,21 @@ export function Book({
 
 }
 
-function PageInner({ page, pageNumber, total }: { page: Page; pageNumber: number; total: number }) {
+function PageInner({
+  page,
+  pageNumber,
+  total,
+  pages,
+  edition,
+}: {
+  page: Page;
+  pageNumber: number;
+  total: number;
+  pages: Page[];
+  edition: string;
+}) {
   if (page.kind === "toc") {
-    const chapters = PAGES.filter((p) => p.kind === "chapter");
+    const chapters = pages.filter((p) => p.kind === "chapter");
     return (
       <div className="w-full h-full p-6 sm:p-10 md:p-14 flex flex-col">
         <p className="font-mono-term text-[10px] tracking-[0.4em] uppercase text-ink-soft mb-2">
