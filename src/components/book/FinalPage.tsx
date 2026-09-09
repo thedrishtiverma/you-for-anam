@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { readPencilNote } from "./PencilNote";
+import {
+  SECOND_EDITION_DATE_LABEL,
+  daysUntilSecondEdition,
+  secondEditionOpen,
+} from "@/lib/edition";
 
 const SIGN_KEY = "you-first-edition:signature";
 const CLOSING_LINE = "YOU are... my favorite chapter.";
@@ -8,14 +13,23 @@ const CLOSING_LINE = "YOU are... my favorite chapter.";
 export function FinalPage({
   onReset,
   answer = "Yes",
+  onSecondEdition,
 }: {
   onReset: () => void;
   answer?: string;
+  onSecondEdition?: () => void;
 }) {
   const [stage, setStage] = useState<"letter" | "closing" | "cover">("letter");
   const [signature, setSignature] = useState("");
   const [pencil, setPencil] = useState("");
   const [copied, setCopied] = useState(false);
+  const [secondOpen, setSecondOpen] = useState(false);
+  const [daysLeft, setDaysLeft] = useState(0);
+
+  useEffect(() => {
+    setSecondOpen(secondEditionOpen());
+    setDaysLeft(daysUntilSecondEdition());
+  }, []);
 
   useEffect(() => {
     setPencil(readPencilNote());
@@ -142,7 +156,40 @@ export function FinalPage({
                   This copy may not be returned.
                 </p>
               </div>
+
+              {/* The next edition — sealed until its own publication date */}
+              <div className="mt-8 border border-ink/15 rounded-sm px-5 py-4 no-print">
+                <p className="font-mono-term text-[9px] tracking-[0.3em] uppercase text-ink-soft">
+                  Forthcoming
+                </p>
+                <p className="font-serif-display text-lg text-ink mt-1">
+                  YOU — Second Edition
+                </p>
+                {secondOpen ? (
+                  <>
+                    <p className="font-serif-display italic text-sm text-ink-soft mt-1">
+                      New pages. Published {SECOND_EDITION_DATE_LABEL}.
+                    </p>
+                    <button
+                      onClick={onSecondEdition}
+                      className="mt-3 font-mono-term text-[10px] tracking-[0.3em] uppercase text-wax hover:text-ink transition"
+                    >
+                      Open the Second Edition →
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p className="font-serif-display italic text-sm text-ink-soft mt-1">
+                      Sealed until {SECOND_EDITION_DATE_LABEL}.
+                    </p>
+                    <p className="mt-2 font-mono-term text-[10px] tracking-[0.25em] uppercase text-ink-soft/70">
+                      {daysLeft} {daysLeft === 1 ? "day" : "days"} to go
+                    </p>
+                  </>
+                )}
+              </div>
             </div>
+
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 no-print">
               <button
