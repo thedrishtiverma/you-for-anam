@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { readPencilNote } from "./PencilNote";
+import {
+  SECOND_EDITION_DATE_LABEL,
+  daysUntilSecondEdition,
+  secondEditionOpen,
+} from "@/lib/edition";
 
 const SIGN_KEY = "you-first-edition:signature";
 const CLOSING_LINE = "YOU are... my favorite chapter.";
@@ -8,14 +13,23 @@ const CLOSING_LINE = "YOU are... my favorite chapter.";
 export function FinalPage({
   onReset,
   answer = "Yes",
+  onSecondEdition,
 }: {
   onReset: () => void;
   answer?: string;
+  onSecondEdition?: () => void;
 }) {
   const [stage, setStage] = useState<"letter" | "closing" | "cover">("letter");
   const [signature, setSignature] = useState("");
   const [pencil, setPencil] = useState("");
   const [copied, setCopied] = useState(false);
+  const [secondOpen, setSecondOpen] = useState(false);
+  const [daysLeft, setDaysLeft] = useState(0);
+
+  useEffect(() => {
+    setSecondOpen(secondEditionOpen());
+    setDaysLeft(daysUntilSecondEdition());
+  }, []);
 
   useEffect(() => {
     setPencil(readPencilNote());
