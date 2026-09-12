@@ -401,6 +401,7 @@ const PAGES: Page[] = [
   { kind: "interlude", body: <Interlude3 /> },
   { kind: "interlude", title: "Artifacts II", body: <LibraryCardPage /> },
   { kind: "interlude", title: "Plate I", body: <PhotoPlate /> },
+  { kind: "interlude", title: "A Private Page", body: <PrivateNote /> },
   { kind: "chapter", part: "Part IV — The Missing Chapter", chapter: "Chapter Eight", title: "Happy Birthday.", body: <Ch8 /> },
   { kind: "end" },
 ];
