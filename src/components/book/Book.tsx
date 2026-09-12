@@ -5,6 +5,7 @@ import { MarginNote } from "./MarginNote";
 import { StagedLines } from "./StagedLines";
 import { ArtifactPage, LibraryCardPage } from "./Artifacts";
 import { PhotoPlate } from "./PhotoPlate";
+import { PrivateNote } from "./PrivateNote";
 import { PencilNote } from "./PencilNote";
 import { SoundToggle } from "./SoundToggle";
 import { playPageTurn } from "@/lib/sound";
@@ -401,6 +402,7 @@ const PAGES: Page[] = [
   { kind: "interlude", body: <Interlude3 /> },
   { kind: "interlude", title: "Artifacts II", body: <LibraryCardPage /> },
   { kind: "interlude", title: "Plate I", body: <PhotoPlate /> },
+  { kind: "interlude", title: "A Private Page", body: <PrivateNote /> },
   { kind: "chapter", part: "Part IV — The Missing Chapter", chapter: "Chapter Eight", title: "Happy Birthday.", body: <Ch8 /> },
   { kind: "end" },
 ];
