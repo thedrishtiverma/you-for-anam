@@ -5,6 +5,7 @@ import { MarginNote } from "./MarginNote";
 import { StagedLines } from "./StagedLines";
 import { ArtifactPage, LibraryCardPage } from "./Artifacts";
 import { PhotoPlate } from "./PhotoPlate";
+import { PrivateNote } from "./PrivateNote";
 import { PencilNote } from "./PencilNote";
 import { SoundToggle } from "./SoundToggle";
 import { playPageTurn } from "@/lib/sound";
